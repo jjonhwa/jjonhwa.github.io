@@ -7,7 +7,7 @@ comments: true
 ---
 Generative Model에 대한 설명을 진행한다.
 
-**부스트 캠프 10일차 학습 요약**
+**부스트 캠프 11일차 학습 요약**
 - **행사** : 특별강의(개발자로 산다는 것)
 - **학습** : Introduction to PyTorch, PyTorch Basics, PyTorch 프로젝트 구조 이해하기
 - **피어 세션**
