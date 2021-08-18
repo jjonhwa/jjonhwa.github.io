@@ -5,7 +5,7 @@ categories: boostcamp
 tags: main
 comments: true
 ---
-Generative Model에 대한 설명을 진행한다.
+PyTorch의 모듈 및 Dataset에 대하여 학습한다.
 
 **부스트 캠프 12일차 학습 요약**
 - **행사** : 특별강의(Python Unit Test)
@@ -13,7 +13,7 @@ Generative Model에 대한 설명을 진행한다.
 - **피어 세션**
 
 ## 목차
-- [1. AutoGrad & Optimizer](#1-autograd---optimizer)
+- [1. AutoGrad & Optimizer](#1-autograd--optimizer)
 - [2. PyTorch Dataset](#2-pytorch-dataset)
 - [3. 피어 세션](#3-피어-세션)
 - [4. 12일차 후기](#4-12일차-후기)
