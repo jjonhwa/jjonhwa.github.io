@@ -5,7 +5,7 @@ categories: boostcamp
 tags: main
 comments: true
 ---
-Generative Model에 대한 설명을 진행한다.
+PyTorch에 대한 기본적인 내용을 학습한다.
 
 **부스트 캠프 11일차 학습 요약**
 - **행사** : 특별강의(개발자로 산다는 것)
