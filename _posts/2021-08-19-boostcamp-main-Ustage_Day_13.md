@@ -13,7 +13,7 @@ PyTorch 구조에 대하여 학습한다.
 - **피어 세션**
 
 ## 목차
-- [1. 모델 불러오기](#1-autograd--optimizer)
+- [1. 모델 불러오기](#1-모델-불러오기)
 - [2. Monitoring tools for PyTorch](#2-monitoring-tools-for-pytorch)
 - [3. 피어 세션](#3-피어-세션)
 - [4. 13일차 후기](#4-13일차-후기)
