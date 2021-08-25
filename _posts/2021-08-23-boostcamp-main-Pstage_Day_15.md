@@ -16,7 +16,7 @@ Competition에 대한 소개, 각 구성요소에 대하여 학습한다.
 ## 목차
 - [1. Competition with AI Stage](#1-competition-with-ai-stage)
 - [2. EDA](#2-eda)
-- [3. P-Stage](#3-pstage)
+- [3. P-Stage](#3-p-stage)
 - [4. 피어 세션](#4-피어-세션)
 - [5. 15일차 후기](#5-15일차-후기)
 
