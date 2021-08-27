@@ -18,7 +18,7 @@ Training & Inference에 대하여 학습한다.
 - [2. Training & Inference](#2-training--inference)
 - [3. P-Stage](#3-p-stage)
 - [4. 피어 세션](#4-피어-세션)
-- [5. 17일차 후기](#5-17일차-후기)
+- [5. 18일차 후기](#5-18일차-후기)
 - [6. 해야할 일](#6-해야할-일)
 
 ## 1. 학습 요소
