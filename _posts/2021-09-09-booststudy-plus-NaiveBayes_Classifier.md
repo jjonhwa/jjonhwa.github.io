@@ -102,6 +102,7 @@ for word, count in tqdm(word_count) :
 ```
 
 - 모델 구현
+
 ```
 class NaiveBayesClassifier() :
     def __init__(self, word2idx, k = 0.1) :
@@ -162,6 +163,7 @@ class NaiveBayesClassifier() :
 ```
 
 - 모델 학습 및 테스트
+
 ```
 classifier = NaiveBayesClassifier(word2idx)     # vocab을 사용하여 NaiveBayes분류기 정의
 classifier.train(train_tokenized, train_labels) # 훈련
