@@ -44,11 +44,11 @@ google_fonts:        Lato
 
 # Set your Google Analytics id to receive `pageview` events.
 # To remove Google Anaylics from your page, remove the line below.
-google_analytics:    UA-137374202-1
+google_analytics:    ""#UA-137374202-1
 
 # Setting a disqus shortname will enable the comment section on pages with `comments: true` in the front matter
 disqus: True
-disqus_shortname:    theorydb
+disqus_shortname:    KeepGoing
 
 # This text will appear in the footer of every page. Markdown enabled.
 copyright:           '&copy; 2019.04. by theorydb'
