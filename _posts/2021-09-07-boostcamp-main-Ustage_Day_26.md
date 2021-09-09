@@ -14,7 +14,7 @@ comments: true
 ## 목차
 - [1. Recurrent Neural Network](#1-recurrent-neural-network)
 - [2. Experiment Toolkig](#2-language-model)
-- [3. LSTM & GRU](#3-lstm---gru)
+- [3. LSTM & GRU](#3-lstm-gru)
 - [4. 피어 세션](#4-피어-세션)
 - [5. 26일차 후기](#5-26일차-후기)
 - [6. 해야할 일](#6-해야할-일)
