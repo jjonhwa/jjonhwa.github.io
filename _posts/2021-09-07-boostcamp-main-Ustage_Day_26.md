@@ -181,4 +181,3 @@ comments: true
 - LSTM & GRU에서의 backpropagation 내용 심화 이해
 - BPTT 이외에 RNN / LSTM / GRU 구조를 유지하면서 gradient vanishing 혹은 exploding 문제를 완화할 수 있는 방법이 있을까?
 - RNN / LSTM / GRU 기반의 Language Model에서 초반 time step의 정보를 전달하기 어려운 점을 완화할 수 있는 방법이 있을까?
-- 
