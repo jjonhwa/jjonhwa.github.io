@@ -14,10 +14,10 @@ comments: true
 
 ## 목차
 - [1. Natural Language Process](#1-natual-language-process)
-- [2. Bag-of-Words](#2-bag---of---words)
+- [2. Bag-of-Words](#2-bag-of-words)
 
-## 1. Bag-of-Words
-### 1-1. Natural Language Processing
+## 1. Natural Language Processing
+### 1-1. NLP
 - NLP 분야의 최신기술 및 연구결과가 발표되는 것은 대표적으로 ACL, EMNLP, NAACL이 있다.
 
 #### low-level parsing
