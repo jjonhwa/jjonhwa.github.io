@@ -87,6 +87,7 @@ test_tokenized = make_tokenized(test_data)
 - Vocab 생성
     - 가장 많이 등장한 토큰 순서대로 나열해주고 이를 index 매겨 vocab을 생성한다.
     - vocab을 생성하는 방법은 다양하게 존재한다.
+    
 ```
 word_count = defaultdict(int) # 가장 많이 등장한 token 순서대로 dict형태로 나열한다.
 for tokens in tqdm(train_tokenized) :
