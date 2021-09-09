@@ -9,9 +9,9 @@ NaiveBayes Classifier에 대한 요약과 구현을 진행한다.
 NaiveBayes Classifier에 대한 보다 자세한 설명은 https://jjonhwa.github.io/boostcamp/2021/09/06/boostcamp-main-Pstage_Day_25-1/#2-bag-of-words 에서 확인할 수 있다.
 
 ## 목차
-- [1. NaiveBayes Classifier란?](#1-naivebayes-classifeir란)
+- [1. NaiveBayes Classifier란?](#1-naivebayes-classifier란)
 - [2. NaiveBayes 요약 설명](#2-naivebayes-요약-설명)
-- [3. NaiveBayes Classifier 구현](#2-naivebayes-classifier-구현)
+- [3. NaiveBayes Classifier 구현](#3-naivebayes-classifier-구현)
 
 ## 1. NaiveBayes Classifier란?
 [위키백과 - 나이브 베이즈 분류](https://ko.wikipedia.org/wiki/%EB%82%98%EC%9D%B4%EB%B8%8C_%EB%B2%A0%EC%9D%B4%EC%A6%88_%EB%B6%84%EB%A5%98)에서 참고하였습니다.
