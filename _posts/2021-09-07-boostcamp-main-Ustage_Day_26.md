@@ -5,7 +5,7 @@ categories: boostcamp
 tags: main
 comments: true
 ---
- 모델에 대하여 학습한다.
+RNN 모델에 대하여 학습한다.
 
 **부스트 캠프 26일차 학습 요약**
 - **학습** : RNN, Language Model, LSTM & GRU
