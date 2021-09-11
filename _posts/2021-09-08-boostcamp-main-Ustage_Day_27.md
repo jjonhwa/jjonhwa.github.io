@@ -56,7 +56,7 @@ Attention, Beam search에 대하여 학습하고 BLEU Metric에 대하여 알아
 
 #### Attention 모듈의 동작 과정
 ![32](https://user-images.githubusercontent.com/53552847/132700128-ed47f56a-3444-473e-b4bf-7102cbdc7304.PNG)
-- 마지막 $$h_0$$와 <sos> token을 가지고 $$h^d_1$$(decoder의 첫번째 hidden state vector)를 출력한다.
+- 마지막 $$h_0$$와 <sos> token을 가지고 $$h^d_1$$ (decoder의 첫번째 hidden state vector)를 출력한다.
 - decoder에서의 첫 번째 time step에서의 hidden state vector를 가지고 다음 단어 예측에 사용할 뿐만 아니라 encoder에서 주어진 여러개의 hidden state vector 중 현재에 어떤 hidden state vector를 필요로 하는지를 선정하는 역할을 수행한다.
 - 위의 과정은 구체적으로, decoder hidden state vector가 encoder hidden state vector 각각과 내적의 연산을 수행하고 이 내적값을 decoder hidden state vector와 encoder hidden state vector 사이의 유사도로 이해할 수 있고, 이 값들을 softmax 취해서 각각의 내적값을 logit vector로 생각하여 각각의 단어에 대한 확률값으로 계산할 수 있다.
 - 이렇게 나온 확률값은 각각의 encoder hidden state vector에 부여되는 가중치로서 사용이 되고, 이를 가중평균 계산하여 하나의 encoding vector를 구할 수 있다.
