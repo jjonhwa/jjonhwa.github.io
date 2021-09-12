@@ -6,7 +6,7 @@ tags: plus
 comments: true
 ---
 NaiveBayes Classifier에 대한 요약과 구현을 진행한다.
-NaiveBayes Classifier에 대한 보다 자세한 설명은 https://jjonhwa.github.io/boostcamp/2021/09/06/boostcamp-main-Pstage_Day_25-1/#2-bag-of-words 에서 확인할 수 있다.
+NaiveBayes Classifier에 대한 보다 자세한 설명은 [여기](https://jjonhwa.github.io/boostcamp/2021/09/06/boostcamp-main-Pstage_Day_25-1/#2-bag-of-words)에서 확인할 수 있다.
 
 ## 목차
 - [1. NaiveBayes Classifier란?](#1-naivebayes-classifier란)
