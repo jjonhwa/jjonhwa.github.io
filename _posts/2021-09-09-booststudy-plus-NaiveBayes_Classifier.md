@@ -45,7 +45,7 @@ import math
 ```
 
 ### 3-2. 데이터 전처리
-- 학습 및 테스트 데이터 입력
+#### 학습 및 테스트 데이터 입력
 ```
 train_data = [
     "진짜 맛있어요. 강추강추",
@@ -67,8 +67,8 @@ test_data = [
     "위생상태가 정말 별로네요.."]
 ```
 
-- Tokenization
-    - tokenization을 통해, "안가면 손해, 맛집이에요." -> ['안', '가면', '손해', ',', '맛집', '이에요', '.']와 같이 만들어준다.
+#### Tokenization
+- tokenization을 통해, "안가면 손해, 맛집이에요." -> ['안', '가면', '손해', ',', '맛집', '이에요', '.']와 같이 만들어준다.
 
 ```
 tokenizer = tag.Okt() # Twitter(Okt) tokenizer를 사용하여 토큰화 진행
@@ -84,9 +84,9 @@ train_tokenized = make_tokenized(train_data)
 test_tokenized = make_tokenized(test_data)
 ```
 
-- Vocab 생성
-    - 가장 많이 등장한 토큰 순서대로 나열해주고 이를 index 매겨 vocab을 생성한다.
-    - vocab을 생성하는 방법은 다양하게 존재한다.
+#### Vocab 생성
+- 가장 많이 등장한 토큰 순서대로 나열해주고 이를 index 매겨 vocab을 생성한다.
+- vocab을 생성하는 방법은 다양하게 존재한다.
     
 ```
 word_count = defaultdict(int) # 가장 많이 등장한 token 순서대로 dict형태로 나열한다.
@@ -101,7 +101,7 @@ for word, count in tqdm(word_count) :
         word2idx[word] = len(word2idx)
 ```
 
-- 모델 구현
+### 3-3. 모델 구현
 
 ```
 class NaiveBayesClassifier() :
@@ -162,7 +162,7 @@ class NaiveBayesClassifier() :
                 }
 ```
 
-- 모델 학습 및 테스트
+### 3-4. 모델 학습 및 테스트
 
 ```
 classifier = NaiveBayesClassifier(word2idx)     # vocab을 사용하여 NaiveBayes분류기 정의
