@@ -38,7 +38,7 @@ $sudo pat install default-jdk
 !pip install konlpy # 최초 한 번만 진행해준다.
 
 from tqdm import tdqm
-from konlpy
+from konlpy import tag
 from collection import defaultdict
 
 import math
