@@ -247,7 +247,7 @@ for word in test_words :
     print(max(emb.squeeze(0)))
 ```
 
-- SKipGram의 경우 다음과 같이 출력된다.
+- SKipGram의 경우 다음과 같이 출력된다. 
 
 Word: 음식  
 tensor(2.7496, device='cuda:0', grad_fn=<UnbindBackward>)  
