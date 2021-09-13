@@ -74,7 +74,7 @@ https://darkpgmr.tistory.com/106
 ### 4. SVD와 Pseudo Inverse
 #### 1. pseudo inverse란?
 - 'Ax = b'에서 A가 정방행렬이 아닐 경우 A의 역행렬 대신 사용하는 $$A^+$$
-- 위 식에서 해는 x = $$A^+$$ b가 되고 이 때, x는 \|| Ax - b \||(Loss)를 최소화하는 해가 된다.
+- 위 식에서 해는 x = $$A^+$$ b가 되고 이 때, x는 \| Ax - b \|(Loss)를 최소화하는 해가 된다.
 
 #### 2. Pseudo Inverse와 SVD는 어떤 관게?
 - SVD는 A를 $$U$$$$\sum$$$$V^T$$로 쪼갤 수 있다는 것을 알 수 있다. 이 때, pseudo inverse인 $$A^+$$ 는  $$V$$$$\sum^+$$$$U^T$$로 계산된다.
