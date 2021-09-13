@@ -249,6 +249,7 @@ for word in test_words :
 
 - SKipGram의 경우 다음과 같이 출력된다. 
 
+```
 Word: 음식  
 tensor(2.7496, device='cuda:0', grad_fn=<UnbindBackward>)  
 Word: 맛  
@@ -259,3 +260,4 @@ Word: 위생
 tensor(3.1804, device='cuda:0', grad_fn=<UnbindBackward>)  
 Word: 가격  
 tensor(2.8926, device='cuda:0', grad_fn=<UnbindBackward>)  
+```
