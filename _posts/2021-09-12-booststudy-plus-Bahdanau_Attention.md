@@ -117,6 +117,40 @@ Neural Machine Translation By Jointly Learning to Align and Translate 에 대하
 
 ### 5-2. Qualitative Analysis
 #### 5-2-1. Alignment
-- 
+- 위에서 제안된 접근 방식은 source sentence에서의 단어들과 번역으로 생성된 단어들 사이의 soft alignment를 점검하는 직관적인 방식을 제공한다.
+- 가중치 식으로부터 annotation weight $$\alpha_{ij}$$ 를 다음과 같이 시각화할 수 있다.
 ![11](https://user-images.githubusercontent.com/53552847/133007232-c3d195bb-ddb5-4d28-a1b2-87f6095f3cc4.PNG)
+- 위의 그림으로부터, source sentence의 position들이 target word를 생성할 때 어디에 좀 더 많은 중요성을 두었는지에 대하여 시각적으로 볼 수 있다.
+- 특히, 영어와 프랑스어의 순서는 대채로 단조롭고, 형용사와 명사의 순서가 다소 다르게 매겨지는데 이를 정확하게 수행해 내고 있음을 볼 수 있다.
+- 더불어, [the man]을 [l' homme]로 번역한다고 했을 때, hard alignment의 경우 [the]와 [l']만을 매핑하여 고려하기 때문에, [the]를 [le], [la], [les] or [l']로 번역하는데 있어서는 도움이 되지 않는다. 이에 soft alignment는 [l']을 이후 단어인 [man]도 고려함에 있어서 이러한 문제를 해결할 수 있다.
+- 또한, soft-alignment의 장점은 몇몇 단어 혹은 Null을 매핑할 수 있는 역방향 방법을 요구하지 않고 다른 길이의 source phrases와 target phrases를 다루 수 있다는 점이 있다.
 
+#### 5-2-2. Long Sentence
+- 5-1의 그림으로부터, 제안된 모델인 RNNsearch가 긴 문장을 학습하는데 있어서 RNNencdec보다 훨씬 좋다는 것을 알 수 있다.
+- 이는 RNNsearch가 긴 문장을 고정된 길이의 벡터로 encoding하지 않고 단지 특정 단어를 둘러싼 입력 문장의 부분들을 정확하게 encoding한다는 사실에 의한 것 같다.
+- 제시된 정량적 결과와 함께, 이러한 정량적인 관찰은 RNNsearch Architecture가 표준 RNNencdec 모델에 비해 훨씬 더 신뢰할 수 있는 번역 결과를 가진다는 가설을 확증한다.
+
+## 6. Related Work
+### 6-1. Learning to align
+- output symbol과 input symbol의 aligning에 대한 유사한 접근 법은 필적 합성의 context에서 최근 제안되었다.
+- 주어진 문장에 대해 필적을 적용하는 task로서 annotation의 가중치를 계산하기 위하여 Mixture Gaussian kernel을 사용했고, 각 커널의 위치, width 및 mixture coefficient는 alignment model에 의해 예측되었다.
+- 보다 구체적으로 위의 alignment는 위치가 단조롭게 증가하도록 위치를 예측하였는데 이는 올바른 번역을 위한 순서의 재배치를 심각하게 제한한다.
+- 이러한 접근법과 달리, 본 논문에 제안한 align 학습 방법은 각 단어의 번역에 있어서 모든 단어의 annotation weight를 계산하여 사용한다. 
+
+### 6-2. Neural Networks for Machine Translation
+- 기존의 Neural Network를 이용한 Machine Translation 분야에서는 하나의 feature를 기존의 통계적 기계 번역 시스템에 전달하거나, 번역 후보군들의 순위를 다시 매김하는 것을 크게 제한하였다.
+- 이에 대하여, 기존에 존재하는 번역 시스템의 하위 요소로서 Neural Network를 성공적으로 사용하여, 전통적으로 target-side language model로서 학습된 Neural Network는 번역 후보군들을 다시 랭크 매기거나 다시 점수를 매기게 한다.
+- 이러한 시도를 바탕으로 Machine Translation System의 SOTA보다 더 좋은 번역 성능을 보였음에도 불구하고 **우리는 Neural Network만을 기반으로한 완전히 새로운 번역 시스템을 만들고자한다. 본 논문에서 고려한 Neural Machine Translation System의 접근은 이러한 초기 번역 시스템으로부터 근본적으로 벗어난 것이다.**
+- 즉, 기존 시스템의 일부로서 Neural Network를 사용하는 것 대신, 모델 그자체로서 source sentence로부터 직접적인 번역 결과를 생성한다.
+
+## 7. Conclusion
+- encoder-decoder approach라고 불리는 Neural Machine Translation에서의 관례적인 접근은 전체 input sequence를 하나의 고정된 길이의 벡터로 encode하고 이를 바탕으로 decode를 진행하며 번역 결과를 수행하는데, 최근 연구에 의거하여, 이러한 고정된 길이의 context vector를 사용하는 것은 긴 문장을 번역하는데 문제가 있을 것이라고 추측하였다.
+- 위의 issue를 다루기 위하여, 새로운 architecture를 제안하는데, 이는 각 target word를 생성할 때, input word set과 encoder에 의해 계산된 annotation을 모델이 search할 수 있도록 basic encoder-decoder를 확장했다.
+- 이로부터, encoder가 전체 source 문장의 정보를 하나의 고정된 길이의 벡터로 압축하는 것을 하지 않게 만들 수 있었고, 모델이 target word의 생성에 관련있는 정보에만 집중할 수 있게 만들 수 있다.
+- 전통적인 Machine Translation System과 달리, alignment mechanism을 포함한 번역 시스템의 모든 pieces들은 정확한 번역을 생산하기 위해 더 높은 log probability를 만드는 방향으로 jointly하게 학습된다.
+- English-to-French task에서 제안된 모델인 RNNsearch는 문장의 길이와 상관없이 RNNencdec에 비해 상당히 높은 성능을 가졌고, source sentence의 길이에 대해 훨씬 더 robust함을 실험적으로 볼 수 있었다.
+- alignment에 대한 정량적인 분석에 의해서, 모델이 각 target 단어를 관련 source word 또는 그들의 annotation과 함께 정확하게 정렬할 수 있다는 결론을 낼 수 있었다.
+- 좀 더 중요하게, 제안된 접근은 기존의 phrase-based machine translation과 비교할만한 번역 성능을 달성했고, 이는 Architecture가 전부 Neural Machine Translation으로 이루어져있다는 것을 고려할 때 엄청난 결과이다.
+- 앞으로 도전할 것들 중의 하나는 rare word 혹은 unkown words를 더 잘 다루는 것이다. 이는 모델이 더 널리 사용되거나 모든 context에서 기존의 SOTA Machine Translation System의 성능을 대신하기 위해 요구될 것이다.
+
+본 리뷰는, 'Neural Machine Translation By Jointly Learning to Align and Translate'을 바탕으로 번역 및 본인 스스로의 의견을 덧붙여 작성하였으며 잘못된 내용이 있다면 의견을 남겨주시면 감사하겠습니다!
