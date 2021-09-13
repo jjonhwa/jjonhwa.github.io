@@ -39,7 +39,7 @@ $sudo pat install default-jdk
 
 from tqdm import tdqm
 from konlpy import tag
-from collection import defaultdict
+from collections import defaultdict
 
 import math
 ```
