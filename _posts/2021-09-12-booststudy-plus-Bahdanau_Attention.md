@@ -83,5 +83,40 @@ Neural Machine Translation By Jointly Learning to Align and Translate 에 대하
 ![9](https://user-images.githubusercontent.com/53552847/132981425-9baedff3-306d-4705-9504-673984c1ae5c.PNG)
 - 최근의 input에 대하여 더 잘 표현하는 RNN의 경항성으로 인하여, 위의 annotation $$h_j$$는 $$x_j$$에 대한 주변 단어들에게 focus를 맞추어 진행 할 수 있게 된다.
 
+## 4. Experiment settings
+- 위에서 제안된 접근방법을 English-to-French translate task를 바탕으로 평가한다. "ACL WMT '14"에서 제공된 bilingual, parallel corpora를 사용한다.
+- 성능의 비교를 위해, 최근에 제안된 RNN Encoder-Decoder와 함께 같은 dataset과 training procedures를 사용하여 진행한다.
 
-(추가)
+### 4-1. Dataset
+- Europarl(61M words), news commentary(5,5M), UN(421M) 그리고 90M, 272.5M 크기의 두 개의 crawled corpora를 사용하였고 통합하여 850M words를 사용한다.
+- "Cho et al"에 있는 절차를 따르고, "Axelrod et al"에 의한 data selection 방법을 사용하여 348M 개의 단어를 가진 combined corpus의 사지으로 줄여서 사용한다.
+- 혹여나, 훨씬 더 큰 단일 언어 말뭉치를 사용하여 encoder를 pre-train 가능할지라도, Parallel corpus를 제외한 어떤 하나의 단일 언어로 된 데이터를 사용하지 않는다.
+- validation set은 news-test-2012와 news-test-2013을 concatenate하여 사용하였고, training data에 사용되지 않는 "WMT '14"의 3003개의 문장으로으로 구성된 test set을 만들고 이로 모델을 평가한다.
+- **tokeniation을 진행한 후, 각 언어에서 가장 빈번하게 등장한 3만개를 최종 word list로 사용하고, 이에 속하지 않는 단어들은 모두 special token이나 [UNK]로 매핑했다. 더불어, lowercasing or stemming과 같은 특별한 전처리 방법은 데이터에 적용하지 않았다.**
+
+### 4-2. Models
+- RNN Encoder-Decoder와 RNNsearch로서 제안된 모델, 두 개에 대하여 모델을 학습한다.
+- 각각 두 번 훈련시키는데, 30단어에 이르는 문장으로(RNNencdec-30, RNNsearch-30)으로 진행하고, 50단어에 이르는 문장으로(RNNencdec-50, RNNsearch-50) 진행한다.
+- **RNNencdec의 encoder와 decoder는 1000개의 hidden units를 각각 가지고, RNNsearch의 encoder는 forward, backward RNN 각각 1000개의 hidden units을 가지고 decoder 역시 1000개의 hidden units을 가진다.**
+- 이 두 case 모두, **각 target word의 조건부 확률을 계산하기 위해서 single maxout hidden layer를 가진 multi-layer network를 사용한다.**
+- 각 모델을 학습하기 위해 **Adadelta를 가진 minibatch SGD 알고리즘#**을 사용하고, **minibatch의 크기는 80**으로 사용하여 경사하강을 진행한다. 
+- 각 모델은 약 5일 가량 학습했다.
+- 학습이 완료된 후, 조건부 확률을 대략적으로 최대화하는 번역을 찾기 위해서 **Beam Search를 사용한다.**
+- 모델의 architecture의 더 자세한 세부사항과 실험에 사용된 훈련 과정은 Appendices A, B에서 확인할 수 있다.
+
+## 5. Results
+### 5-1. Quantitative Result
+![10](https://user-images.githubusercontent.com/53552847/133007230-57b37287-2932-4228-b648-42726c7800c5.PNG)
+- 위의 표에서, BLEU score로 측정된 번역 performance를 확인할 수 있다.
+- 모든 케이스에서, RNNsearch가 기존의 RNNencdec에 비해 월등한 성능을 가지는 것을 명확히 알 수 있다.
+- Dataset을 고려할 때, RNNsearch의 기능이 우리가 사용한 parallel corpora 뿐만 아니라 단일 언어 corpus(418M) (Moses)를 사용하여 학습한 기존의 phrase-based translation system과 유사한 성능이 나온다는 것은 유의미한 성과로 볼 수 있다.
+- 제안된 접근의 숨겨진 동기 중 하나는 basic encoder-decoder approach에서의 fixed-length context vector의 사용이 긴 문장에 대한 underperform으로 이끌었다고 추측했다.
+![12](https://user-images.githubusercontent.com/53552847/133007351-816ff88e-2de4-47c5-93f0-d5d735c0fef5.PNG)
+- 위의 그림에서 볼 수 있듯이, RNNencdec의 성능은 문장의 길이가 길어질수록 극적으로 안좋아지는 것을 볼 수 있다.
+- 반면에 RNNsearch-30, RNNsearch-50 모두 긴 문장에 대한 좀 더 robust함을 볼 수 있다. 특히, RNNsearch-50의 경우 길이가 50이상인 문장에 대해서도 견고하다는 것을 볼 수 있다.
+
+### 5-2. Qualitative Analysis
+#### 5-2-1. Alignment
+- 
+![11](https://user-images.githubusercontent.com/53552847/133007232-c3d195bb-ddb5-4d28-a1b2-87f6095f3cc4.PNG)
+
