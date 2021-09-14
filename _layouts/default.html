@@ -1,9 +1,11 @@
 ---
 layout: base
 ---
-{% if page.use_math %}
-	{% include mathjax_support.html %}
-{% endif %}
+<head>
+  {% if page.use_math %}
+    {% include mathjax_support.html %}
+  {% endif %}
+</head>
 
 <div class="page">
   <h1 class="page-title">{{ page.title | default:"Home"}}</h1>
