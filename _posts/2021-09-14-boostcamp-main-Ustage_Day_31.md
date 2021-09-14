@@ -105,12 +105,51 @@ Transformer에 대하여 학습한다.
 
 ### 1-7. 전반적인 형태
 ![19](https://user-images.githubusercontent.com/53552847/133261584-a46764e8-54bc-4fb7-9463-e8c469df40f3.PNG)
-- 각 word별로의 Embedding vector를 입력으로 준다.
+- 각 word 별로의 Embedding vector를 입력으로 준다.
+- 각 Position 별로 해당 Positional Encoding vector를 더해준다.
+- self-attention을 바탕으로 한 Multi-Head Attention, Residual Connection, Layer Noramlization, Feed Forward Layer를 진행한다. 이 과정을 하나의 Block으로 수행하고 이를 통과하여 input vector와 동일한 차원의 vector가 최종적인 output vector로 나오게 된다.
+- 이러한 Block이 N개 사용되는데, Encoding Block을 총 N번 통과하고 흔히 N은 6, 12, 24 등의 값을 주로 사용한다. 가령 N이 6일 경우, 동일한 Encoding Block을 6번 쌓고 각 Block간의 Parameter는 전부 제각각 독립이다.
+- 이렇게 Block을 쌓음으로서 각 word 별로의 encoding vector가 점차 high-level의 vector로 encoding이 진행되고 최종적으로 각 word별로 encoding vector를 얻게 된다.
+
+### 1-8. Encoder Self-Attention Visualization
 ![20](https://user-images.githubusercontent.com/53552847/133261588-ba395312-9530-4ed1-acdf-a32591d36370.PNG)
+- 위 그림은, 위쪽 아래쪽이 동일한 문장으로 구성되어 있는 self-attention을 보여주고 있으며, 각 word가 Query로 사용되었을 때, input vector들의 K, V vector들을 사용사용해서 어떤 식으로 정보를 가져오는 지에 대한 패턴을 보여준다.
+- 위의 그림으로부터, making이라는 word가 input vector에서의 more, difficult, 2008에 대한 정보를 가져가고 있음을 알 수 있다.
+- 아래 sequence에서의 각 row가 각각의 head를 나타내며 more, difficult에서는 더 많은 head에서 정보를 가져가는 것을 볼 수 있다.
+
+### 1-9. Decoder
 ![21](https://user-images.githubusercontent.com/53552847/133261590-2dfa8ab8-0af6-4b7f-a653-39135f20610a.PNG)
+- decoder의 첫 번째 layer에서의 진행과정은 seq2seq with attention에서 decoder hidden state vector를 뽑는 과정이라고 이해할 수 있다.
+- 다만, Masked Multi-Head Attention을 거치게 되는데 이는 1-10에서 설명하도록 한다.
+- Masked Multi-Head Attention을 거친 후 그 다음 layer로서 MHA(Multi-Head Attention)을 거치게 되는데, 여기서의 Q는 decoder의 이전 layer에서 만들어진 decoder hidden state vector가 Q로 사용되고, encoding 최종 output에서의 vector가 K, V로 들어가서 attention이 수행된다.
+- 이 MHA가 seq2seq with attention에서의 추가적인 attention 모듈로서 decoder hidden state vector를 Q로해서 encoder hidden state vector 중 어느 vector에 가중치를 걸어서 해당 정보를 다음 decoder time step에 가져올지를 정하는 encoder-decoder attention 모듈이 된다.
+- 그 이후에는 encoder와 마찬가지로 Residual Connection, Layer Normalization을 통과하고 Feed Forward Layer, Residual Connection, Layer Normalization을 통과하게 된다.
+- 이렇게 하여 최종적으로 decoder input word에 해당하는 각각의 vector가 decoder의 최종 encoding vector로서 출력된다.
+- 최종 Linear Transformation에서 최종 출력된 encoding vector를 vocab size만큼으로 늘려주어 softmax를 취하는 방식으로 최종 출력 word의 예측을 수행한다.
+- 이렇게 나온 최종 출력 word vector와 ground truth word vector사이의 softmax loss를 통해 backpropagation이 되고 전체 Network가 학습된다.
+
+### 1-10. Masked Self-Attention
 ![22](https://user-images.githubusercontent.com/53552847/133261594-c282844d-ef7f-4bc0-88aa-65935fff78f1.PNG)
+- Those words not yet generated cannot be accessed during the inference time
+- Renormalization of softmax output prevents the model from accessing ungenerated word
+- 각 단어가 다음 단어를 예측할 때, 모든 단어들에 대한 정보 접근을 허용하게 되면 이는 cheating이 되므로, 이후에 등장하는 단어들에 대한 K, V에 대해서는 제외해주어야 한다.
+- 이러한 이유로 인하여, softmax를 통해 각 word에 대한 K, Q로부터의 확률값을 구하게 되면, 이후에 등장하는 단어들에 대한 정보를 차단해주기 위하여 softmax 값으로부터 후처리의 개념으로 등장하는 단어를 고려하는 확률은 0으로 만들어주고 다시 각 row의 합이 1이 되도록 Renormalization을 한다.
+- 즉, Masked Self-Attention의 Masking의 의미는 앞서 말한 것처럼, Attention에서 모든 단어가 다른 모든 단어를 볼 수 있게 한 후 후처리적으로 보지 말아야할 즉, 뒤에 등장하는 단어들에 대한 가중치를 0으로 만드는 과정이라고 이해할 수 있다.
+
+### 1-11. Experimental Results
 ![23](https://user-images.githubusercontent.com/53552847/133261598-c8e9307b-a407-4f15-9865-81e4dada8032.PNG)
+- 위의 표에서처럼, BLEAU score의 경우 English-to-Germany의 경우 26정도를, English-to-France의 경우 40 정도를 기록하는 것을 볼 수 있고 이로부터 Transformer Model이 다른 모델들에 비해 훨씬 좋은 성능을 나타내는 것을 알 수 있다.
+- BLEU score의 원리를 확인했을 때, 40%라는 값은 n-gram에 대한 점수가 떨어졌다는 것을 고려하면 실제로 확인했을 때 체감적으로 올바르게 번역이 되어있다고 느낄 정도의 성능이다.
+
+## 2. 31일차 후기
+1시간의 강의를 듣는데 정말 이렇게 오래걸리는 줄을 다시 한 번 체감했다. 여러번 했던 내용인데도 불구하고 다시 들을 때마다 마치 새로운 내용인 것 마냥 느껴져서 한 번 할 때 잘할껄이라고 생각하긴 하지만... 나는 한 번 할때 열심히 했는데 왜그러는 걸까
+
+강의 뿐만 아니라 논문과도 친해지기 위해서 열심히 읽으려고 노력도하고 있고 새로운 팀원들과 새로운 과제에 대한 문제를 해결하기 위해 현재 알아가고 있는 과정 중에 있는 것 같다. 
+
+하루하루 할 일을 딱딱 정해놓고 그 일들을 마무리하는 걸 목표로 하루하루를 보내고 있는데 나름 뿌듯하고 아직 부족함이 많음에 대해서도 매일매일 느끼며 더욱 열심히 하고 있는 것 같다~ 남은 기간 Burn out 오지 않게 천천히 열심히 하자~!
+
 ## 3. 해야할 일
 - 어떻게 Multi-Head Attention에서 각 head마다 다른 정보들이 뽑혀져 오는가?
 - head가 앞서 말한 것처럼 서로 다른 정보들을 상호보완적으로 뽑는 역할을 한다.라는데 어떻게 서로 다른 정보들을 뽑는 거지?!
 - 우리가 원하는 평균과 분산을 주입하기 위해 affine transformation을 수행하며 이는 각 노드별로 여러 단어에 걸쳐 공통적인 변환을 적용해주게 된다.라는데 이것은 왜 단어별로 평균 분산을 0, 1로 만들어주고 노드별로 affine transformation을 진행하는가?
+- Attention은 이름 그대로 어떤 단어의 정보를 얼마나 가져올 지 알려주는 직관적인 방법인데 Attention 모델을 output을 설명하는데 사용할 수 있는 방법이 있을까?
