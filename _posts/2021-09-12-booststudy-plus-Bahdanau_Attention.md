@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "bahdanau attention 논문 리뷰"
+title: "bahdanau attention 논문 Reading"
 categories: booststudy
 tags: plus
 comments: true
