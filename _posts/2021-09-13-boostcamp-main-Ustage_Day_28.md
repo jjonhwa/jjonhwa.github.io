@@ -58,25 +58,25 @@ Transformer에 대하여 학습한다.
 - Qeury, Key, Value and Output is all vectors
 - Output is weighted sum of values
 - Weight of each value is computed by an inner product of query and correspoding key
-- Queries and Keys have same dimensionality $$d_k$$ and dimensionality of Value is $$d_v$$
+- Queries and Keys have same dimensionality $d_k$ and dimensionality of Value is $d_v$
 - Q와 K는 내적 연산이 가능해야하기 때문에, 같은 dimension이어야 하며, V는 softmax연산을 통해 계산된 scalar형태의 가중치와 연산이 되기 때문에 Q, K와 dimension이 동일할 필요는 없다.
 ![4](https://user-images.githubusercontent.com/53552847/133054487-94460a77-300d-4035-828c-ae647d66ccbb.PNG)
-- Attention module의 최종적인 output의 차원은 "word의 개수 x $$d_v$$"가 된다. 흔히 output의 차원은 $$d_v$$라고 얘기하며 "word의 개수 x $$d_v$$"라고 말할 수 있는 이유는 실제 Transformer 구현상으로 동일한 shape으로 mapping된 Q, K, V가 사용되어 각 matrix의 shape은 모두 동일하기 때문이다.
+- Attention module의 최종적인 output의 차원은 "word의 개수 x $d_v$"가 된다. 흔히 output의 차원은 $d_v$라고 얘기하며 "word의 개수 x $d_v$"라고 말할 수 있는 이유는 실제 Transformer 구현상으로 동일한 shape으로 mapping된 Q, K, V가 사용되어 각 matrix의 shape은 모두 동일하기 때문이다.
 - 위의 query vector q에 대하여 stack한 형태의 matrix Q로 나타내면 다음의 그림처럼 나타낼 수 있다. 
 ![5](https://user-images.githubusercontent.com/53552847/133054488-5021252e-709d-4e0e-ac74-42895e777412.PNG)
 ![6](https://user-images.githubusercontent.com/53552847/133054490-6e024093-4858-4b8a-a31e-af5722553b41.PNG)
 - 특히, softmax 연산의 경우, 각 query 별로 연산을 수행해야 하므로 row-wise하게 연산한다.
 - Query vector에 대한 attention model의 계산을 행렬 연산으로 바꾸어 진행하게되면 GPU를 활용하여 굉장히 빠르게 병렬화하여 계산할 수 있으며 이러한 병렬적 행렬 연산을 바탕으로 transformer 모델은 기존의 RNN등에 비해서 상대적으로 학습이 빠른 특성을 가진다.(질문 후 삭제 :44:10)
 ![7](https://user-images.githubusercontent.com/53552847/133054493-aa787175-a23f-4f2c-b154-692238a44c60.PNG)
-- softmax를 취하기 전에 Q, K의 내적값에 대하여 sqrt($$d_k$$)로 나눠준다.
+- softmax를 취하기 전에 Q, K의 내적값에 대하여 sqrt($d_k$)로 나눠준다.
 
 ![8](https://user-images.githubusercontent.com/53552847/133054495-b63211ad-13db-4fd3-ab45-f6ffb5f20478.PNG)
-- Scaling 과정으로서 sqrt($$d_k$$)로 내적값을 왜 나눠주는가?
+- Scaling 과정으로서 sqrt($d_k$)로 내적값을 왜 나눠주는가?
     - Q, K의 원소들이 통계적으로 서로 독립이고 평균이 0, 분산이 1인 확률변수라고 가정할 때, 내적을 한 후의 평균과 분산은 각각 0, 'element의 수 * 분산'이 된다.
     - 즉, Q, K의 dimension에 따라, 분산이 커지는 것을 알 수 있고, Q, K vector의 dimension이 엄청나게 커졌을 경우 이로 부터 연산된 유사도를 softmax 취하게 되면 확률분포가 어떤 큰 값에 몰리는 형태의 패턴이 나타날 수 있다.
     - 반대로, 분산이 작았을 경우에는 확률 분포가 좀 더 고르게 Q에 대한 K의 확률값이 uniform distribution에 가까운 형태로 나타날 수 있다.
     - 이러한 이유로 인하여, 내적의 참여하는 Q, K의 dimension이 얼마냐에 따라서 내적값의 분산이 크게 좌지우지 될 수 있고 이에 따라 의도치 않게 softmax로 부터 나온 확률분포가 어느 하나의 key에만 몰리는 극단적인 확률로 나올 수 있다.
-    - 이렇기에, Q, K의 내적값을 일정하게 유지시켜줌으로서 학습을 안정화시킬 수 있는데 이 때 내적값을 sqrt($$d_k$$)로 나눠주어 일정하게 유지시킬 수 있다.
+    - 이렇기에, Q, K의 내적값을 일정하게 유지시켜줌으로서 학습을 안정화시킬 수 있는데 이 때 내적값을 sqrt($d_k$)로 나눠주어 일정하게 유지시킬 수 있다.
     - 이렇게 되면, Q, K의 dimensino이 얼마였던지 간에 상관없이 분산이 일정하게 1인 형태로 유지되는 형태로 나온다.
 - softmax의 값이 한 쪽으로 굉장히 몰리게 되는 경우에, 실제로 이 상태로 학습을 진행하게 되면 gradient vanishing이 발생할 수 있는 위험성이 있고, 의도치 않게 Q, K의 dimension을 크게 설정하고 scaling 없이 attention 모듈을 수행하였을 때, 종종 학습이 전혀 진행되지 않는 형태가 발생할 수 있다.
 
