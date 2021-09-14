@@ -4,6 +4,7 @@ title: "NLP Ustage Day 6 (Day 30)"
 categories: boostcamp
 tags: main
 comments: true
+use_math: true
 ---
 Transformer에 대하여 학습한다.
 
