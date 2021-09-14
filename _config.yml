@@ -113,6 +113,10 @@ exclude:
   - Gemfile.lock
 
 markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 
 kramdown:
   footnote_backlink: '&#x21a9;' # '&#x21a9;&#xfe0e;'
@@ -140,9 +144,4 @@ tipue_search:
     categories: []
     tags: []
     
-# Math equation
-markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
+
