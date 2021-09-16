@@ -63,7 +63,7 @@ output = tokenizer(sentence)
 
 ### 2-2. tokenizer의 함수로 적용
 - tokenize 함수
-주어진 문장을 token화 시킨다.   
+    - 주어진 문장을 token화 시킨다.   
 ```
 tokenized = tokenizer.tokenize(sentence)
 print(tokenized)
@@ -73,7 +73,7 @@ print(tokenized)
 ```
 
 - get_vocab 함수
-vocabulary를 확인한다. 
+    - vocabulary를 확인한다. 
 ```
 vocab = tokenizer.get_vocab()
 
