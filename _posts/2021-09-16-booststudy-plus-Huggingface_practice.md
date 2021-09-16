@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NLP Ustage Day 7 (Day 31)"
+title: "Hugging Face Practice"
 categories: boostcamp
 tags: main
 comments: true
