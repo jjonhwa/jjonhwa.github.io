@@ -198,6 +198,7 @@ torch.Size([5, 20])
 
 - batch_mask tensor를 만들어 attentoin_mask의 입력값으로 넣어준다.
 - 이는 pad token일 경우 0, 아닐 경우 1을 가지는 형태이다.
+                              
 ```
 batch_mask = (batch != pad_id).float() # batch가 pad일경우 False, 아닐 경우 true를 주고 이를 float로 변경하여 0과 1로 치환한다.
 
