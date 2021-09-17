@@ -111,6 +111,12 @@ Self-supervised Pre-training Model에 대하여 학습한다.
 - "5. Task(benefit with BERT)"에서 추가적으로 설명하도록 한다.
 
 ## 4. BERT vs GPT
+<style>
+.tablelines table, .tablelines td, .tablelines th {
+    border: 1px solid black;
+    }
+</style>
+
 ||BERT|GPT-1|  
 |---|---|---|  
 |pre-training task|MLM|LM|  
@@ -118,6 +124,8 @@ Self-supervised Pre-training Model에 대하여 학습한다.
 |Training Special Tokens|[SEP], [CLS], segment embedding|[Extract], delimiter|  
 |Batch Size|128,000 words|32,000 words|  
 |Learning Rate|task specific fine tuning learning rate|5e-5 for all fine tuning experiments|  
+{: .tablelines}
+
 - 일반적으로 더 큰 batch_size를 사용하게 되면, 최종 모델 성능이 더 좋아지고 학습도 안정화 된다. 이는 Gradient Descent를 진행할 때, 일부의 데이터만으로 도출된 gradient로 직접적인 parameter를 업데이트 할 지 혹은 더 많은 데이터를 바탕으로 도출된 gradient로 parameter를 업데이트 할 지에 대한 것으로, 일반적으로 더 많은 데이터를 사용하여 최적화를 수행할 때, 학습이 더 안정적이고 성능이 좋다.
 - 하지만, batch size가 커질수록, 메모리가 비례해서 증가하기 때문에 더 많은 GPU 메모리와 고성능의 GPU가 필요하게 된다.
 - 기존에 pre-training을 하기위한 output layer를 제거하고, main task를 위한 output layer를 추가하여 학습을 진행하게 되는데, 이 때 output layer는 random initialization을 통해 main task를 위한 데이터를 바탕으로 학습하고, 기존에 학습된 transformer encoder는 상대적으로 적은 learning rate를 사용하여 조금만 변화하도록 하여 일반화 가능한 지식이 최대한 많이 유지될 수 있는 형태로 학습이 진행된다.
