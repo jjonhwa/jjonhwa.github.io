@@ -14,7 +14,7 @@ Self-supervised Pre-training Model에 대하여 학습한다.
 
 ## 목차
 - [1. Self-supervised pre-training models](#1-self---supervised-pre---training-models)
-- [2. GPT-1](#2-gpt---1)
+- [2. GPT-1](#2-gpt-1)
 - [3. BERT](#3-bert)
 - [4. BERT vs GPT](#4-bert-vs-gpt)
 - [5. Task(benefit with BERT)](#5-taskbenefit-with-bert)
