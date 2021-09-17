@@ -108,7 +108,7 @@ Self-supervised Pre-training Model에 대하여 학습한다.
 - 각 word의 역할을 추출해내야하는 task로서 모든 단어에 대한 encoding vector가 output layer의 input으로 들어가게 된다.
 
 #### Question Answering
-- "5. Task(benefit with BERT)"에서 추가적으로 설명하도록 한다.
+- [5. Task(benefit with BERT)](https://jjonhwa.github.io/boostcamp/2021/09/16/boostcamp-main-Ustage_Day_33/#5-taskbenefit-with-bert)에서 추가적으로 설명하도록 한다.
 
 ## 4. BERT vs GPT
 <style>
