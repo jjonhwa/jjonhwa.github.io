@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Hugging Face Practice"
-categories: boostcamp
-tags: main
+categories: booststudy
+tags: plus
 comments: true
 ---
 hugging face를 사용하는 간단한 tutorial 느낌의 practice를 한다.
