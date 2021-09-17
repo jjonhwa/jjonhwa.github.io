@@ -118,7 +118,6 @@ Self-supervised Pre-training Model에 대하여 학습한다.
 </style>
 
 ||BERT|GPT-1|  
-|---|---|---|  
 |pre-training task|MLM|LM|  
 |Training-data size|BookCorpus and Wikipedia(2,500M words)|BookCorpus(800M words)|  
 |Training Special Tokens|[SEP], [CLS], segment embedding|[Extract], delimiter|  
