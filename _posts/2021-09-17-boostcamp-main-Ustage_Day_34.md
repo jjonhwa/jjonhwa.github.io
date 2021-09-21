@@ -21,7 +21,7 @@ Advanced Self-supervised Pre-training Model에 대하여 학습한다.
 - [6. 34일차 후기](#6-34일차-후기)
 - [7. 해야할 일](#7-해야할-일)
 
-## 1.GPT-2
+## 1. GPT-2
 - Model Architecture는 GPT-1과 크게 다르지 않다. GPT-1에 대한 설명은 [GPT-1](https://jjonhwa.github.io/boostcamp/2021/09/16/boostcamp-main-Ustage_Day_33/#2-gpt-1)에서 확인할 수 있다.
 - GPT-1에서 Transformer Model에서의 self-attention block을 점점 더 많이 쌓아서 모델을 키웠고, pre-training task는 여전히 LM을 사용하여 다음 단어 예측 task로 사용하였다.
 - Training data의 경우 훨씬 증가된 사이즈의 40GB의 텍스트를 사용하였고, 특히, 질 높은, 잘 쓰여진 글을 Dataset으로 사용하여 효과적으로 다양한 지식을 배울 수 있도록 유도하였다.
@@ -135,7 +135,7 @@ Advanced Self-supervised Pre-training Model에 대하여 학습한다.
 NLP level 2의 U-stage도 끝났다. 하지만... 공부를 하면 할 수록 해야할 공부가
 마치 지수함처럼 불고 있는 것만 같다 ㅜㅜ.
 
-해야할 일이 산더미이지만 차분히 하나하나씩 해결해 나가도록 하자! 출발선은 뒤쪽에 있을지 모르더라도 천천히 꾸준히해서 결승선에 도달하는 것만큼은 비슷할 수 있도록 노력해야겟다~!
+해야할 일이 산더미이지만 차분히 하나하나씩 해결해 나가도록 하자! 출발선은 뒤쪽에 있을지 모르더라도 천천히 꾸준히해서 결승선에 도달하는 것만큼은 비슷할 수 있도록 노력해야겠다~!
 
 ## 7. 해야할 일
 - GPT-2에서 layer의 index에 비례하여 random initialization 되는 값을 더 작게 만들면 위쪽의 layer로 갈수록 하는 역할을 점점 줄어들게 만든다고 하는데 왜 그러는걸까? 
