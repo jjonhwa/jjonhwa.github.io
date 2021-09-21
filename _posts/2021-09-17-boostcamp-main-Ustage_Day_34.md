@@ -109,9 +109,33 @@ Advanced Self-supervised Pre-training Model에 대하여 학습한다.
 ![42](https://user-images.githubusercontent.com/53552847/133711843-037806b6-1617-453a-a91f-7f0637d0eae2.PNG)
 
 ## 5. Light-weights Models
+- pre-trained된 모델을 다양한 방식으로 고도화하는 연구들이 활발하게 연구되고 있으며, 그 중 하나로 모델 경량화 연구가 있다.
+- 기존의 BERT, GPT-2, GPT-3, ELECTRA 등의 모델들이 self-attention block을 점점 더 많이 쌓음으로서 더 좋은 성능을 냈지만, pre-trained하기 위해서 더 많은 GPU resource와 시간, 계산량이 필요했고, 이로 인해 실제 현업에서 사용하기에는 어려움이 있다.
+- 경량화 model은 이렇게 비대해진 모델을 좀 더 적은 layer 수나 parameter 수를 가지는 경량화된 모델로 발전시키는 혹은 확장하는 형태의 연구이다.
+- 경량화 모델의 연구추세는 기존의 큰 사이즈 모델이 가지던 성능을 최대한 유지하면서 모델의 크기와 모델의 계산 속도를 빠르게 하는 것에 초점이 맞추어져 있다.
+- 경량화된 모델은 CLOUD 서버나 고성능의 GPU resource를 사용하지 않고서도 가령, 휴대폰 등의 소형 device에서도 모델을 load해서 더 적은 전력 소모 혹은 배터리 소모량으로 빠르게 계산을 수행하고자 할 때 사용된다.
+- 모델을 경량화하는 방식은 다양하지만 여기서는 Distillation 기법을 활용한 두 개의 모델만 짧게 설명하고자 한다.
+
 ### 5-1. DistillBERT
+- hugging face에서 발표한 논문이다.
+- teacher model, studenet model이 있으며, teacher model은 student model을 가르치는 역할을 하며, student model은 teacher model에 비해 layer 수나 parameter 측면에서 더 작은 경량화된 형태의 모델이다.
+- student model은 teacher model이 내는 여러 output이나 pattern을 잘 묘사할 수 있도록 학습이 진행된다.
+- 작은 사이즈의 student model은 teacher model이 어떤 주어진 문장에서 주어진 문장에 대해서 MLM을 수행할 때, output vector를 softmax를 통과시키고 이를 vocabulary 상에서의 확률분포를 예측값으로 주게 되는데 여기서 나온 예측값을 ground truth로 사용하는 것이다. 즉, teacher model에서의 예측값을 student model의 ground truth로 사용하는 방식이다.
+- 이렇게 하여 student model이 teacher model이 하는 여러 행동 혹은 예측 결과를 최대한 잘 묘사할 수 있도록 학습이 진행된다.
+
 ### 5-2. Tiny BERT
+- Tiny BERT 역시 teacher model과 student model이 있지만, distillBERT와 달리, Tiny BERT에서는 실제 target distribution을 ground truth로서 student model을 적용하고 teacher model을 담도록 학습하는 방식을 채택한다.
+- 이에 더하여, 어떤 Embedding layer와 각 self-attention block이 가지고 있는 $$W_q$$, $$W_k$$, $$W_v$$ 등의 attention matrix, 그 결과로 나오는 hidden state vector까지 유사해질 수 있도록 student network가 teacher network를 담을 수 있도록 하는 형태로 학습을 진행한다.
+- 즉, teacher model에서의 최종적인 예측값 뿐만 아니라 그 과정의 중간 결과물들이 있는데, 여기서 student model의 중간 결과물이 teacher model의 중간 결과물에 최대한 가까워질 수 있도록 MSE loss를 사용하여 학습을 동시에 진행하게 된다.
+- 하지만, 이렇게 할 경우, student model의 hidden state vector가 teacher model의 hidden state vector의 차원수보다 작을 수 있으므로, 차원으로 인한 loss를 적용하기가 어려울 수 있다.
+- 이에 대하여, student model과 teacher model의 hidden state vector가 유사한 형태를 띌 수 있게 만들어 loss를 적용하기 위하여, teacher model에 hidden state vector가 최종적으로 fully connected layer를 한 번 더 거쳐서 student hidden state vector와 차원이 맞도록 하여 dimension으로 인한 miss-match를 해결하였다.
+- Tiny BERT의 핵심은, student model에서의 최종 output으로 나타나는 예측값 뿐만 아니라 중간 결과물도 teacher model을 담을 수 있도록 학습한다는 것이다.
+
 ## 6. 34일차 후기
+NLP level 2의 U-stage도 끝났다. 하지만... 공부를 하면 할 수록 해야할 공부가
+마치 지수함처럼 불고 있는 것만 같다 ㅜㅜ.
+
+해야할 일이 산더미이지만 차분히 하나하나씩 해결해 나가도록 하자! 출발선은 뒤쪽에 있을지 모르더라도 천천히 꾸준히해서 결승선에 도달하는 것만큼은 비슷할 수 있도록 노력해야겟다~!
 
 ## 7. 해야할 일
 - GPT-2에서 layer의 index에 비례하여 random initialization 되는 값을 더 작게 만들면 위쪽의 layer로 갈수록 하는 역할을 점점 줄어들게 만든다고 하는데 왜 그러는걸까? 
