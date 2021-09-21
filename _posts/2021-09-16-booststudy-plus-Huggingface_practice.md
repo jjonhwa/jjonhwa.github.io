@@ -223,7 +223,7 @@ torch.Size([5, 20])
 - last hidden state & pooler output 확인
     - BERT model은 최종 출력으로 last hidden state와 pooler를 내놓는다.
     - last hidden state는 word의 encoding vector로서 Batch_size x Max_length x Hidden_dimension_size의 차원을 가진다.
-    - pooler는 downstream task에 적용하기 위한 [CLS] token에 대한 값으로 이는 last hidden state의 Max_length의 첫번째이며 Batch_size x Hidden_dimension_size의 차원을 가진다.
+    - pooler는 downstream task에 적용하기 위한 [CLS] token에 대한 embedding 값으로 [CLS] token에 대한 hidden state vector를 추가적으로 linear layer and Tanh activation fuction을 적용한 값이다. shape은 Batch_size x Hidden_dimension_size를 가지게 된다. ([stack overflow 참고](https://stackoverflow.com/questions/63377198/what-is-the-difference-between-pulled-output-and-sequence-output-in-bert-layer))
 
 ```
 outputs = model(input_ids = batch, attention_mask = batch_mask)
@@ -237,3 +237,22 @@ print(pooler_output.shape)
 torch.Size([5, 20, 768])
 torch.Size([5, 768])
 ```
+
+### 4-1. Sentence-level Classification
+- BERT 모델에서 Sentence-level classification을 진행하기 위해서는 [CLS] token을 사용한다.
+- BERT 모델에서 최종적인 출력인 last_hidden_states의 token에서의 0번째 vector가 [CLS] hidden state vector이므로 이 값을 최종 fully connected layer를 거쳐 classification하고자 하는 개수로 출력해준다.
+
+```
+cls_output = last_hidden_states[:, 0, :] # token의 0번째 vector가 cls output hidden state vector이다.
+
+num_classes = 10 # 10개의 class에 대한 classification을 진행한다고 가정하자.
+sent_linear = nn.Linear(config.hidden_size, num_claases) # 768 to 10인 fully connected layer를 추가한다.
+sent_output = sent_linear(cls_output) # cls_output을 최종적으로 fully connected layer를 통과해 최종 예측을 진행할 수 있다.
+```
+
+### 4-2. 그 외에 다양한 head를 추가한 모델
+- Sequence-level의 classification : BertForSequenceClassification.from_pretrained(bert_name)
+- MLM : BertForMaskedLM.from_pretrained(bert_name, config = config)
+- 이 외에서 더욱 다양한 모델들이 존재한다. [추가 모델 찾아보기](https://huggingface.co/transformers/model_doc/bert.html)에서 확인하도록 하자.
+
+Sequence-level의 classification의 경우, 마지막 layer가 hidden_size to 2로 구성되어 있고, MLM의 경우 hidden_size to vacab_size로 구성되어 vocab 중에서 어떤 단어를 출력할 것인지 예측하도록 한다.
