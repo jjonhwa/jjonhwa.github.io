@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Second P-stage 1(Day 37)"
+title: "Second P-stage 2(Day 38)"
 categories: boostcamp
 tags: main
 comments: true
