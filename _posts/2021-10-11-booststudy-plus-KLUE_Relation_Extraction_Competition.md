@@ -55,8 +55,8 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 ## 3. EDA
 **Maximum token length**를 세팅, **Imbalanced Dataset**임을 확인
 ### 3-1. Token 개수 파악
-    -  tokenizer : `klue/bert-base` wordpiece tokenizer 활용
-    -  train/test dataset에서의 token 파악
+-  tokenizer : `klue/bert-base` wordpiece tokenizer 활용
+-  train/test dataset에서의 token 파악
 <style>
 .tablelines table, .tablelines td, .tablelines th {
     border: 1px solid black;
