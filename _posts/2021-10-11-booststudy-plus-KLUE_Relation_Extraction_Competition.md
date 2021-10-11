@@ -25,9 +25,9 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - [10. 협업](#10-협업)
 
 ## 1. Relation Extreaction이란?
-- 하나의 문장이 있을 때, 특정 단어(entity)들 사이의 속성과 관계를 추론하는 문제
+- **하나의 문장이 있을 때, 특정 단어(entity)들 사이의 속성과 관계를 추론하는 문제**
 - 개체명 인식을 통해 entity에 대한 정보를 찾고, 관계 추출을 통해 그 두 개의 entity 사이의 관계를 출력해낸다.
-- RE를 하는 이유는?
+- **RE를 하는 이유는?**
     - 문장 속에서 단어 사이의 관계를 파악함으로서 주어진 문장을 한결 더 부드럽게 이해할 수 있다.
     - 대규모 비정형 텍스트로부터 자동화된 정보를 수집할 수 있다.
     - 언어로부터의 핵심 정보 추출 및 요약이 가능하다.
@@ -96,14 +96,14 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - 이를 토대로, Focal Loss 적용, Stratified KFold, Data Augmentation, Duo Classifier를 실험해보고자 했다.
 
 ## 4. Dataset 구축
-- Relation Extraction의 경우, 각 단어가 subject인지, object인지 알려주는 것이 효과적인 것으로 알려져 있으며, 이에 더불어 subject이면서 person인지, 혹은 organization인지 등도 알려주면 더욱 효과적임으로 여러 paper를 통해 확인할 수 있었다.([paper](https://arxiv.org/pdf/2102.01373.pdf)에서 대략적으로 확인할 수 있다.)
+- Relation Extraction의 경우, **각 단어가 subject인지, object인지 알려주는 것이 효과적인 것**으로 알려져 있으며, 이에 더불어 **subject이면서 person인지, 혹은 organization인지 등도 알려주면 더욱 효과적**임으로 여러 paper를 통해 확인할 수 있었다.([paper](https://arxiv.org/pdf/2102.01373.pdf)에서 대략적으로 확인할 수 있다.)
 
 ![8](https://user-images.githubusercontent.com/53552847/136720610-80d09c0a-9237-43db-96d5-535a8d9cc1fc.PNG)
 
 - 위의 표에서 'Entity marker', 'Typed entity marker', 'Typed entity marker (punct)'를 실험하였다.
 - 베이스라인 모델인 `klue/bert-base`에서 'Typed entity marker'의 성능이 가장 좋음을 파악할 수 있었고, 위의 표에 RoBERTa의 경우 'Typed entity marker (punct)'에서 가장 좋은 성능을 나타냄을 파악할 수 있었다.
-- 'Typed entity marker (punct)'의 경우, `klue/roberta-large` tokenizer를 사용하였는데, 이 tokenizer의 영어 vocab sets은 단지 800개에 불과했고 이에 대하여 entity tag를 한국어로 교체한 후 실험을 진행하였다. ("@\*person\*조지 해리슨@" -> "@\*사람\*조지 해리슨@")
-- 더불어, `klue/roberta-large`의 wordpiece tokenizer prefix의 경우 '##'으로 구성되어 있음을 고려하여, 'Typed enbtity marker (punct)'를 적용할 때, '#'대신 '&'를 적용하여 활용하였다.("안녕하세요" -> "안녕", "##하세요")
+- **'Typed entity marker (punct)'의 경우, `klue/roberta-large` tokenizer를 사용하였는데, 이 tokenizer의 영어 vocab sets은 단지 800개에 불과했고 이에 대하여 entity tag를 한국어로 교체한 후 실험을 진행하였다. ("@\*person\*조지 해리슨@" -> "@\*사람\*조지 해리슨@")**
+- 더불어, **`klue/roberta-large`의 wordpiece tokenizer prefix의 경우 '##'으로 구성되어 있음을 고려하여, 'Typed enbtity marker (punct)'를 적용할 때, '#'대신 '&'를 적용하여 활용하였다.("안녕하세요" -> "안녕", "##하세요")**
 
 - 이에, **'Typed entity marker', 'Typed entity marker (punct)'(kor version)을 활용하여 실험을 진행**하였으며, 각각의 예시는 다음과 같다.
 <style>
@@ -123,10 +123,10 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - Uniform Length Batching 전략을 활용하여 길이가 유사한 문장들끼리 묶어서 진행하는 방법도 구현하고자 하였지만 2주라는 짧은 시간 관계상 직접 적용은 하지 못하였다. 이에 대한 내용과 Batching 전략이 중요한 이유에 대한 내용은 [snoop2head's log](https://snoop2head.github.io/Relation-Extraction/#setting-maximum-token-length-for-roberta-tokenizer)에서 확인할 수 있다.
 
 ## 6. Data Augmentation
-- EDA(Easy Data Augmentation)
+- **EDA(Easy Data Augmentation)**
     - [EDA paper](https://arxiv.org/pdf/1901.11196.pdf) 에서 자세한 내용을 확인할 수 있다.
     - Random Insertion, Random Deletion, Random Swap, Synonym Replacement를 적용하였지만 유의미한 성능의 개선이 이루어지지 않아 적용하지 않았다.
-- Round-trip Translation
+- **Round-trip Translation**
     -  여러 언어로 번역한 후 다시 본래의 언어로 번역하여 같은 의미이지만 다른 형태를 띄게 만드는 Data Augmentation 기법이다.
     -  이를 Pororo NER translation 함수를 활용하여 적용하였다.
     -  2주라는 시간 관계상 약 5000개의 데이터 증가를 하였지만, 유의미한 성능 개선이 이루어지지 않아 적용하지 않았다.
@@ -137,7 +137,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - Relation Extraction 부분이 없을 경우, Named Entity Recognition과 Natural Language Inference를 토대로 선정하였다.
 - Benchmark
     - [KLUE Benchmark](https://github.com/KLUE-benchmark/KLUE#baseline-scores), [Tunib-Electra Benchmark](https://github.com/tunib-ai/tunib-electra), [KoElectra Benchmar](https://github.com/monologg/KoELECTRA)
-    - 위의 Benchmark를 토대로 pre-trained model을 선정하였으며, 이를 토대로 KoElectra, XLM-R-large, KLUE-RoBERTa-large를 활용하여 실험하였다.
+    - 위의 Benchmark를 토대로 pre-trained model을 선정하였으며, 이를 토대로 **KoElectra, XLM-R-large, KLUE-RoBERTa-large**를 활용하여 실험하였다.
 - KoElectra tokenizer의 경우 Unknown token의 발생이 성능 하락의 원인이 됨을 확인할 수 있었고 이를 바탕으로 unknown token이 가장 적게 발생하는 모델을 찾았을 때 XLM-R-large, KLUE-RoBERTa-large가 최종 실험 모델로 선정되었다.
 - 같은 조건 하에서 XLM-R-large와 KLUE-RoBERTa-large를 실험하였을 때 다음과 같았고 최종적으로 **KLUE-RoBERTa-large를 backbone 모델로 선정**하였다.
 <style>
@@ -155,12 +155,12 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - Hidden feature 정보 활용
 ![9](https://user-images.githubusercontent.com/53552847/136721176-cbd96c85-be42-4d6c-9936-9cdb992044f7.PNG)
     - [Matching the Blanks: Distributional Similarity for Relation Learning](https://aclanthology.org/P19-1279.pdf)을 참고하여 선택하였다.
-    - 간략하게 요약하자면, classification을 진행할 때, [CLS] token만 활용하는 것이 아닌 정보를 많이 담고 있는 다른 token의 hidden state vector까지 활용하여 classification을 진행하는 것이다.
+    - 간략하게 요약하자면, **classification을 진행할 때, [CLS] token만 활용하는 것이 아닌 정보를 많이 담고 있는 다른 token의 hidden state vector까지 활용하여 classification을 진행하는 것**이다.
     - 이를 바탕으로 어떤 토큰의 정보를 추가적으로 활용할지 선택하여 모델을 선정하였다.
     - 위의 6개의 모델에 대한 성능은 아래의 표와 같다.
 ![10](https://user-images.githubusercontent.com/53552847/136721443-04523e5e-fe40-4cbf-8983-a84c35f82057.PNG)
-- 이에 대하여, "(f)ENTITY MARKERS - ENTITY START"의 형태를 띄는 **"RE Improved Baseline"**과 "(e)ENTITY MARKERS - MENTION POOL"의 형태를 띄는 **"RBERT"**을 최종적으로 선정하여 진행하였다.
-- 더불어, 기존의 **"KLUE/RoBERTa-large"**를 바탕으로한 모델의 성능과 1~2점 정도의 차이밖에 없어서 기존 모델도 함께 사용하여 최종 Ensemble을 진행하였다.
+- 이에 대하여, **"(f)ENTITY MARKERS - ENTITY START"의 형태를 띄는 "RE Improved Baseline"과 "(e)ENTITY MARKERS - MENTION POOL"의 형태를 띄는 "RBERT"을 최종적으로 선정하여 진행**하였다.
+- 더불어, **기존의 **"KLUE/RoBERTa-large"**를 바탕으로한 모델의 성능과 1~2점 정도의 차이밖에 없어서 기존 모델도 함께 사용하여 최종 Ensemble을 진행**하였다.
 
 ### 7-3. 모델 구조 및 Score
 #### Customized Improved Baseline Model
@@ -212,49 +212,49 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 
 ## 8. Something Importance
 ### 8-1. Epoch
-- Customized Baseline Model의 경우, 3epoch 약 2000 training steps 지점에서 Evaluation Loss가 증가하는 경향을 보였다.
-- Customized RBERT의 경우, 5epoch 약 3200 training steps까지 Evaluation Loss가 감소하는 양상을 보였다. 이는 Customized Baseline Model에 비해 Classification에서 더 많은 정보를 담고 있기 때문인 것으로 판단된다.
+- **Customized Baseline Model의 경우, 3epoch** 약 2000 training steps 지점에서 Evaluation Loss가 증가하는 경향을 보였다.
+- **Customized RBERT의 경우, 5epoch** 약 3200 training steps까지 Evaluation Loss가 감소하는 양상을 보였다. 이는 Customized Baseline Model에 비해 Classification에서 더 많은 정보를 담고 있기 때문인 것으로 판단된다.
 
 ### 8-2. RBERT vs RE Improved Baseline
-- RE Improved Baseline은 모델은 경량화하며 높은 성능을 유지하는 기법임을 발견할 수 있었다.
+- **RE Improved Baseline은 모델은 경량화**하며 높은 성능을 유지하는 기법임을 발견할 수 있었다.
     - RBERT의 경우, Out-of-Fold Ensemble을 활용할 때, 5개의 fold를 활용한 결과 총 10h의 학습시간과 26GB의 GPU 용량을 차지하였다.
     - 반면에 RE Improved Baseline은 5개의 fold를 활용하여 학습한 결과 약 5~6h의 학습시간과 15GB의 GPU 용량을 차지하였다.
     - 이에 더하여, 학습 결과 역시 f1 score 0.745(RBERT), 0.736(RE Improved Baseline)로 떨어지긴 했지만 큰 성능차이는 아니므로 RE Improved Baseline이 어느정도 경량화된 모델이라고 판단할 수 있었다.
 - RBERT 단점
-    - RBERT의 경우, 각 entity token의 hidden state vector들의 평균을 활용하여 classification을 진행하는데 이 과정에서 각 token들의 순서를 무시하게된다.
+    - **RBERT의 경우, 각 entity token의 hidden state vector들의 평균을 활용하여 classification을 진행하는데 이 과정에서 각 token들의 순서를 무시**하게된다.
     - 이러한 문제로 인해, 첫 번째 토큰의 hidden state vector만 활용하는 RE Improved Baseline과 큰 성능 차이가 없는 것으로 판단된다.
 
 ### 8-3. Loss & Optimizer
 #### Loss
 - Imbalanced Dataset에 대하여 Weights to CrossEntropy Loss, LabelSmoothing Loss, Focal Loss 적용을 고려하였다.
-- 이전 대회의 경험(MASK Competition)을 바탕으로, Focal Loss를 활용 했을 때, Imbalanced Dataset에 대하여 성능 개선이 이루어졌음을 실험적으로 깨달았으며, 본 과정에서 역시 Focal Loss를 활용하여 진행하였다. (Focal Loss : Cross Entorpy에 Gamma와 Weight를 추가하여 잘 맞추는 Label에 대한 Loss를 줄여 갱신 속도를 늦춰주는 손실함수이다. [출처](https://arxiv.org/pdf/1708.02002.pdf))
+- 이전 대회의 경험(MASK Competition)을 바탕으로, Focal Loss를 활용 했을 때, Imbalanced Dataset에 대하여 성능 개선이 이루어졌음을 실험적으로 깨달았으며, **본 과정에서 역시 Focal Loss를 활용하여 진행**하였다. (Focal Loss : Cross Entorpy에 Gamma와 Weight를 추가하여 잘 맞추는 Label에 대한 Loss를 줄여 갱신 속도를 늦춰주는 손실함수이다. [출처](https://arxiv.org/pdf/1708.02002.pdf))
 - Focal Loss의 gamma를 기존의 Customized Baseline Model에 적용하여 최적값을 찾기 위한 실험을 진행하였으며, 500 step 기준 gamma = 0.5일때 Evaluation Loss - 0.69 / gamma = 1.0일때 Evaluation Loss - 0.56으로 훨씬 좋은 성능을 보였다.
-- gamma를 2.0으로 진행하였을 때 마찬가지로 성능이 1.0에 비해 떨어진다는 것을 알 수 있었고 최종 gamma를 1.0으로 선택하고 RBERT, RE Improved Baseline에 적용했다.
+- gamma를 2.0으로 진행하였을 때 마찬가지로 성능이 1.0에 비해 떨어진다는 것을 알 수 있었고 **최종 gamma를 1.0으로 선택하고 RBERT, RE Improved Baseline에 적용**했다.
 
 #### Optimizer
 - AdamW와 AdamP 중에서 어떤 optimizer을 사용할 것인지 고민했다.
 - 다음의 표에서 볼 수 있듯이 AdamP의 경우 AdamW에 비해 약간 더 빠른 수렴을 하는 것을 알 수 있었고, 저 수치가 큰 차이를 보이는 것은 아니지만 기존의 Vanilla 모델에서의 Adam의 수렴 속도가 23.33이라는 것을 고려해보았을 때, 22.77은 어느 정도 유의미한 성능 향상이라고 판단할 수 있었다. ([AdamP Paper](https://arxiv.org/pdf/2006.08217.pdf)를 참고 하였다.) 
 ![11](https://user-images.githubusercontent.com/53552847/136739570-122a73fb-c516-4b30-a6bf-b36117a6d7c9.PNG)
-- 이러한 정보를 바탕으로 최종적으로 AdamP optimizer를 활용하였다.
+- 이러한 정보를 바탕으로 **최종적으로 AdamP optimizer를 활용**하였다.
 
 ## 9. Have to Try
-- Uniform Length Batching Strategy
+- **Uniform Length Batching Strategy**
     - Uniform Length Batching을 활용할 경우, 학습 시간을 유의미하게 줄일 수 있다.
     - HuggingFace의 collate class를 활용하여 적용해보자.
     - collate fn을 활용하여 적용해도록 하자.
-- Data Augmentation
+- **Data Augmentation**
     - AEDA 적용해보기
     - Round-trip Translation 적용하기. 시간관계 상 약 5000개의 데이터밖에 증가시키지 못했고, 유의미한 성능 개선을 이루지 못했다. 더 많은 데이터 증강을 통해 성능 개선을 유도해보자.
--  Additional LSTM/GRU Layer
+-  **Additional LSTM/GRU Layer**
     - 기존 Backbone Model에 LSTM 혹은 GRU를 한 번 더 거친 후 Classification을 하게 되면 유의미하게 성능 개선이 일어난다는 것이 알려져 있다.
     - 이를 구현하고자 시도하였으나, validation dataset에서 일전 부분이 drop 되는 현상이 발생하였고, torch tensor size에서 miss match가 일어났다.
     - 이러한 이유로 직접 적용하지 못했고, 원인을 찾은 후 적용해보도록 하자.
-- TAPT(Task Adaptive Pretraining)
+- **TAPT(Task Adaptive Pretraining)**
     - train/test dataset을 활용하여 backbone model을 본 dataset에 잘 적응할 수 있도록 more pretraining을 진행해보자.
     - 본 과정에서는 기존의 `klue/roberta-large`를 제작할 때, 본 과정의 dataset이 이미 학습됬음으로 파악하여 진행하지 않았지만, 유의미한 성능의 개선이 일어났다고 보고한 다른 팀이 있었다.
     - TAPT는 특정 전문 도메인에서 유의미한 성능 개선이 이루어진다고 널리 알려져 있다.
     - 더불어, TAPT의 경우, 실제 현업에서 보다는 competition에서 보다 자주 사용된다고 한다.
-- Fine Tuning with Optuna
+- **HyperParameter Tuning with Optuna**
     - HuggingFace trainer를 활용한 optuna 실험해보기
     - 마지막에 시도를 해보려고 했으나 optuna의 batch_size문제와 학습 시간 상의 문제로 직접 적용하지 못했다.
     - 더불어, 기존의 epoch, batch size 뿐만 아니라 focal loss의 gamma와 같은 hyperparameter들을 적용하는 방법도 찾아보도록 하자.
