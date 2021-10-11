@@ -164,7 +164,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 
 ### 7-3. 모델 구조 및 Score
 #### Customized Improved Baseline Model
-(그림)
+![12](https://user-images.githubusercontent.com/53552847/136745002-2a451754-d863-4b8c-a177-ed07d53caf80.png)
 - 구조
     - Backbone model : `klue/roberta-large`
     - typed entity marker (punct) (ver. kor) : "... @\*사람\*조지해리슨@ ... &^사람^비틀즈& ..."
@@ -174,7 +174,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 - Auprc : 76.317
 
 #### Customized RBERT
-(그림)
+![13](https://user-images.githubusercontent.com/53552847/136745007-699b42eb-5338-43a5-815c-3c681a63e8e4.png)
 - 구조
     - Backbone model : `klue/roberta-large`
     - typed entity marker : "... [OBJ-PERSON]조지해리슨[/OBJ-PERSON] ... [SUB-PERSON]비틀즈[/SUB-PERSON] ..."
