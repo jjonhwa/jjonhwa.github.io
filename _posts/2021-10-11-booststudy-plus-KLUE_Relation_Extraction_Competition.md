@@ -267,3 +267,5 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     - dev branch를 개설하여 dev branch에 모두의 코드를 통합
     - 통합한 코드를 바탕으로 실험 진행
     - 최종 코드를 main branch에 업로드
+
+본 과정은 Boostcamp를 진행하며 HappyFace팀으로 참여한 Project이며 이 과정에 대한 Code는 Boostcamp 수료 이후 공개한다.
