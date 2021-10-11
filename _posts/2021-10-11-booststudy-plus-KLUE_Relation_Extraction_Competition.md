@@ -7,8 +7,9 @@ comments: true
 ---
 KLUE Relation Extraction 대회(In BoostCamp) 회고
 
-#### **AUPRC score : 1st place out of 19 teams.**
-#### **Micro F1 Score : 3rd place out of 19 teams.**
+**AUPRC score : 1st place out of 19 teams.**
+**Micro F1 Score : 3rd place out of 19 teams.**
+
 부스트캠프에서 2주간 진행한 KLUE Relation Extraction 대회 진행과정에 대한 설명을 진행합니다! 본 과정은 Boostcamp HappyFace팀이 함께 진행하였습니다.
 
 ## 목차
@@ -34,7 +35,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     - QA 시스템
     - 지식 그래프 구축
 - 예시
-    -  "<something>는 조지 해리슨이 쓰고 비틀즈가 1969년 앨범 《Abbey Road》에 담은 노래다." 라는 문장이 있고, "조지 해리슨", "비틀즈"가 있을 때 이 둘 사이의 관계를 구하는 문제이다.
+    -  "\<something\>는 조지 해리슨이 쓰고 비틀즈가 1969년 앨범 《Abbey Road》에 담은 노래다." 라는 문장이 있고, "조지 해리슨", "비틀즈"가 있을 때 이 둘 사이의 관계를 구하는 문제이다.
     -  위의 문제에서는 no_relation이 관계에서의 정답이다.
 
 ## 2. Dataset
@@ -43,7 +44,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     - test dataset : 7765개 (label은 전부 100으로 처리되어 있다.)
 - Data 예시
     - id, sentence, subject_entity, object_entity, label, source로 구성된 csv 파일
-    - sentence example : <Something>는 조지 해리슨이 쓰고 비틀즈가 1969년 앨범 《Abbey Road》에 담은 노래다. (문장)
+    - sentence example : \<Something\>는 조지 해리슨이 쓰고 비틀즈가 1969년 앨범 《Abbey Road》에 담은 노래다. (문장)
     - subject_entity example : {'word': '조지 해리슨', 'start_idx': 13, 'end_idx': 18, 'type': 'PER'} (단어, 시작 idx, 끝 idx, 타입)
     - object_entity example : {'word': '비틀즈', 'start_idx': 24, 'end_idx': 26, 'type': 'ORG'} (단어, 시작 idx, 끝 idx, 타입)
     - label example : no_relation (관계),
@@ -70,8 +71,9 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 |Medain token 개수|46|45|
 |분포|![2](https://user-images.githubusercontent.com/53552847/136720425-190af853-087d-45e4-915e-8a23e0955ba4.PNG)|![3](https://user-images.githubusercontent.com/53552847/136720426-327084a2-cd99-4b26-8833-987b35ed4a6a.PNG)|
 {: .tablelines}
-    - train / test에서의 비슷한 분포 확인
-    - train, test에서 비슷한 분포가 아닐 경우, train에서 학습하여 높은 성능이 나온다고 해도 test에서 성능이 떨어질 수 있기 때문이다.
+- train / test에서의 비슷한 분포 확인
+- train, test에서 비슷한 분포가 아닐 경우, train에서 학습하여 높은 성능이 나온다고 해도 test에서 성능이 떨어질 수 있기 때문이다.
+    
 ![4](https://user-images.githubusercontent.com/53552847/136720417-634c2a21-3ab0-4d7a-8435-698e37a35b86.PNG)
 
 - Label별 Token 개수 파악
@@ -81,7 +83,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     }
 </style>
 |Label 0|Label 1|Label 2|...|
-|![5](https://user-images.githubusercontent.com/53552847/136720419-e47a8b8a-a506-4090-8d01-e5c9a138ce83.PNG)|![6](https://user-images.githubusercontent.com/53552847/136720420-bc3e849d-f92c-4ffd-938d-c751aa070985.PNG)|![7](https://user-images.githubusercontent.com/53552847/136720421-dd861673-9995-4124-b4e2-ec27a9f96f90.PNG)||
+|![5](https://user-images.githubusercontent.com/53552847/136743534-c2513333-4967-46c2-bfd1-7d14a93ca4d0.PNG)|![6](https://user-images.githubusercontent.com/53552847/136720420-bc3e849d-f92c-4ffd-938d-c751aa070985.PNG)|![7](https://user-images.githubusercontent.com/53552847/136720421-dd861673-9995-4124-b4e2-ec27a9f96f90.PNG)||
 {: .tablelines}
     - 전체적으로 모든 class에서 비슷한 양상의 히스토그램을 띄는 것을 볼 수 있었다.
     - tokenizer의 max_length의 경우 (train:229/test:221)이므로 이보다 짧게 구성해도 좋을 것이라고 판단.
