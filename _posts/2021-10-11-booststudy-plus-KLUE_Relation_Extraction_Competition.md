@@ -102,7 +102,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 
 - 위의 표에서 'Entity marker', 'Typed entity marker', 'Typed entity marker (punct)'를 실험하였다.
 - 베이스라인 모델인 `klue/bert-base`에서 'Typed entity marker'의 성능이 가장 좋음을 파악할 수 있었고, 위의 표에 RoBERTa의 경우 'Typed entity marker (punct)'에서 가장 좋은 성능을 나타냄을 파악할 수 있었다.
-- 'Typed entity marker (punct)'의 경우, `klue/roberta-large` tokenizer를 사용하였는데, 이 tokenizer의 영어 vocab sets은 단지 800개에 불과했고 이에 대하여 entity tag를 한국어로 교체한 후 실험을 진행하였다. ("@*person*조지 해리슨@" -> "@*사람*조지 해리슨@")
+- 'Typed entity marker (punct)'의 경우, `klue/roberta-large` tokenizer를 사용하였는데, 이 tokenizer의 영어 vocab sets은 단지 800개에 불과했고 이에 대하여 entity tag를 한국어로 교체한 후 실험을 진행하였다. ("@\*person\*조지 해리슨@" -> "@\*사람\*조지 해리슨@")
 - 더불어, `klue/roberta-large`의 wordpiece tokenizer prefix의 경우 '##'으로 구성되어 있음을 고려하여, 'Typed enbtity marker (punct)'를 적용할 때, '#'대신 '&'를 적용하여 활용하였다.("안녕하세요" -> "안녕", "##하세요")
 
 - 이에, **'Typed entity marker', 'Typed entity marker (punct)'(kor version)을 활용하여 실험을 진행**하였으며, 각각의 예시는 다음과 같다.
@@ -112,13 +112,13 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     }
 </style>
 ||Sentence|
-|Typed Entity Marker|<Something>는 [OBJ-PERSON]조지 해리슨[/OBJ-PERSON]이 쓰고 [SUB-PERSON]비틀즈[/SUB-PERSON]가 1969년 앨범 《Abbey Road》에 담은 노래다.|
-|Typed Entity Marker Punct (kor version)|<Something>는 &^ORG^조지 해리슨#이 쓰고 @*사람*비틀즈@가 1969년 앨범 《Abbey Road》에 담은 노래다.|
+|Typed Entity Marker|\<Something\>는 [OBJ-PERSON]조지 해리슨[/OBJ-PERSON]이 쓰고 [SUB-PERSON]비틀즈[/SUB-PERSON]가 1969년 앨범 《Abbey Road》에 담은 노래다.|
+|Typed Entity Marker Punct (kor version)|\<Something\>는 &^ORG^조지 해리슨#이 쓰고 @\*사람\*비틀즈@가 1969년 앨범 《Abbey Road》에 담은 노래다.|
 {: .tablelines}
 
 ## 5. Tokenizer
-- [3. EDA]을 바탕으로 tokenizer의 **max_token_length의 경우 128**로 맞춰주었다.
-- [4. Dataset 구축]에서 활용한 entity marker를 붙이는 작업을 진행할 경우, subject_entity, object_entity 각각 앞뒤로 1개 token이 추가되 총 4개의 token이 증가하게 되는데 이를 token_length에 반영해주는 것이 중요하다. 즉 **max_token_length에 +4**를 해준다.
+- [3. EDA](https://jjonhwa.github.io/booststudy/2021/10/11/booststudy-plus-KLUE_Relation_Extraction_Competition/#3-eda)을 바탕으로 tokenizer의 **max_token_length의 경우 128**로 맞춰주었다.
+- [4. Dataset 구축](https://jjonhwa.github.io/booststudy/2021/10/11/booststudy-plus-KLUE_Relation_Extraction_Competition/#4-dataset-%EA%B5%AC%EC%B6%95)에서 활용한 entity marker를 붙이는 작업을 진행할 경우, subject_entity, object_entity 각각 앞뒤로 1개 token이 추가되 총 4개의 token이 증가하게 되는데 이를 token_length에 반영해주는 것이 중요하다. 즉 **max_token_length에 +4**를 해준다.
 - **Dynamic Padding**을 활용하기 위하여, tokenizer의 padding 옵션을 True가 아닌 max_length로 주어 적절히 max_length가 잘려서 불필요한 길이가 남아있지 않게 만들어 주었다.
 - Uniform Length Batching 전략을 활용하여 길이가 유사한 문장들끼리 묶어서 진행하는 방법도 구현하고자 하였지만 2주라는 짧은 시간 관계상 직접 적용은 하지 못하였다. 이에 대한 내용과 Batching 전략이 중요한 이유에 대한 내용은 [snoop2head's log](https://snoop2head.github.io/Relation-Extraction/#setting-maximum-token-length-for-roberta-tokenizer)에서 확인할 수 있다.
 
@@ -167,7 +167,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 (그림)
 - 구조
     - Backbone model : `klue/roberta-large`
-    - typed entity marker (punct) (ver. kor) : "... @\*사람\*조지해리슨@ ... &\^사람\^비틀즈& ..."
+    - typed entity marker (punct) (ver. kor) : "... @\*사람\*조지해리슨@ ... &^사람^비틀즈& ..."
     - 기존의 Improved Baseline paper에서 entity tag를 감싸는 marker로 "#"을 사용했지만 'klue/roberta-large' tokenizer의 prefix와 겹치기 때문에, 이로 인한 문제 발생을 방지하기 위하여 '#' -> '&'을 사용하였다.
     - 기타 Hyper Parameter 및 코드는 추후 Boostcamp가 종료된 후 github을 통해 확인할 수 있다.
 - f1 score : 73.277	
@@ -206,8 +206,8 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     }
 </style>
 ||public|private|
-|f1 score|75.218|81.480|
-|auprc|73.865|83.216|
+|f1 score|75.218|73.865|
+|auprc|81.480|83.216|
 {: .tablelines}
 
 ## 8. Something Importance
