@@ -54,7 +54,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 
 ## 3. EDA
 **Maximum token length**를 세팅, **Imbalanced Dataset**임을 확인
-- Token 개수 파악
+### 3-1. Token 개수 파악
     -  tokenizer : `klue/bert-base` wordpiece tokenizer 활용
     -  train/test dataset에서의 token 파악
 <style>
@@ -76,24 +76,24 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     
 ![4](https://user-images.githubusercontent.com/53552847/136720417-634c2a21-3ab0-4d7a-8435-698e37a35b86.PNG)
 
-- Label별 Token 개수 파악
+### 3-2. Label별 Token 개수 파악
 <style>
 .tablelines table, .tablelines td, .tablelines th {
     border: 1px solid black;
     }
 </style>
 |Label 0|Label 1|Label 2|...|
-|![5](https://user-images.githubusercontent.com/53552847/136743534-c2513333-4967-46c2-bfd1-7d14a93ca4d0.PNG)|![6](https://user-images.githubusercontent.com/53552847/136720420-bc3e849d-f92c-4ffd-938d-c751aa070985.PNG)|![7](https://user-images.githubusercontent.com/53552847/136720421-dd861673-9995-4124-b4e2-ec27a9f96f90.PNG)||
+|![5](https://user-images.githubusercontent.com/53552847/136743812-11879fac-c474-4683-b6f3-21eb5e157882.PNG)|![6](https://user-images.githubusercontent.com/53552847/136720420-bc3e849d-f92c-4ffd-938d-c751aa070985.PNG)|![7](https://user-images.githubusercontent.com/53552847/136720421-dd861673-9995-4124-b4e2-ec27a9f96f90.PNG)||
 {: .tablelines}
-    - 전체적으로 모든 class에서 비슷한 양상의 히스토그램을 띄는 것을 볼 수 있었다.
-    - tokenizer의 max_length의 경우 (train:229/test:221)이므로 이보다 짧게 구성해도 좋을 것이라고 판단.
-    - 특히 100~150 구간에 소수의 데이터가 분포하고 있으며, 128개의 토큰보다 더 많은 토큰을 가진 문장의 개수는 Train:1.4%/Test:0.8% 이므로 128 정도의 tokenizer의 max_length를 가지면 좋을 것이라고 판단하여 max_length를 128로 선택하였다.
+- 전체적으로 모든 class에서 비슷한 양상의 히스토그램을 띄는 것을 볼 수 있었다.
+- tokenizer의 max_length의 경우 (train:229/test:221)이므로 이보다 짧게 구성해도 좋을 것이라고 판단.
+- 특히 100~150 구간에 소수의 데이터가 분포하고 있으며, 128개의 토큰보다 더 많은 토큰을 가진 문장의 개수는 Train:1.4%/Test:0.8% 이므로 128 정도의 tokenizer의 max_length를 가지면 좋을 것이라고 판단하여 max_length를 128로 선택하였다.
 
-- Imbalanced Dataset
+### 3-3. Imbalanced Dataset
 ![71](https://user-images.githubusercontent.com/53552847/136720423-3d1e6616-8c8a-4e89-b922-59e365f93779.PNG)
-    - 0(= no_relation)이 대부분을 차지하고 있음을 확인할 수 있다.
-    - label별 분포의 차이가 꽤 크다는 것을 알 수 있다.
-    - 이를 토대로, Focal Loss 적용, Stratified KFold, Data Augmentation, Duo Classifier를 실험해보고자 했다.
+- 0(= no_relation)이 대부분을 차지하고 있음을 확인할 수 있다.
+- label별 분포의 차이가 꽤 크다는 것을 알 수 있다.
+- 이를 토대로, Focal Loss 적용, Stratified KFold, Data Augmentation, Duo Classifier를 실험해보고자 했다.
 
 ## 4. Dataset 구축
 - Relation Extraction의 경우, 각 단어가 subject인지, object인지 알려주는 것이 효과적인 것으로 알려져 있으며, 이에 더불어 subject이면서 person인지, 혹은 organization인지 등도 알려주면 더욱 효과적임으로 여러 paper를 통해 확인할 수 있었다.([paper](https://arxiv.org/pdf/2102.01373.pdf)에서 대략적으로 확인할 수 있다.)
