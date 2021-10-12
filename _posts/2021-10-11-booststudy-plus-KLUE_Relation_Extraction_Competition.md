@@ -87,7 +87,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 {: .tablelines}
 - 전체적으로 모든 class에서 비슷한 양상의 히스토그램을 띄는 것을 볼 수 있었다.
 - tokenizer의 max_length의 경우 (train:229/test:221)이므로 이보다 짧게 구성해도 좋을 것이라고 판단.
-- 특히 100~150 구간에 소수의 데이터가 분포하고 있으며, 128개의 토큰보다 더 많은 토큰을 가진 문장의 개수는 Train:1.4%/Test:0.8% 이므로 128 정도의 tokenizer의 max_length를 가지면 좋을 것이라고 판단하여 max_length를 128로 선택하였다.
+- 특히 100~150 구간에 소수의 데이터가 분포하고 있으며, 128개의 토큰보다 더 많은 토큰을 가진 문장의 개수는 Train:1.4%/Test:0.8% 이므로 128 정도의 tokenizer의 max_length를 가지면 좋을 것이라고 판단하여 **max_token_length를 128로 선택**하였다.
 
 ### 3-3. Imbalanced Dataset
 ![71](https://user-images.githubusercontent.com/53552847/136720423-3d1e6616-8c8a-4e89-b922-59e365f93779.PNG)
