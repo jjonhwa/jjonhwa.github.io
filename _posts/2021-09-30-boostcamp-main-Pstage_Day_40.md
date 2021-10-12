@@ -7,7 +7,7 @@ comments: true
 ---
 NLP Relation Extraction task를 수행하는데 있어 Tips를 제공한다.
 
-**부스트 캠프 39일차 학습 요약**
+**부스트 캠프 40일차 학습 요약**
 - **행사** : 오피스 아워 
 - **P-Stage** : 베이스라인 모델 학습, KFold 구축, max_length 실험
 - **피어 세션**
