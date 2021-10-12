@@ -7,7 +7,7 @@ comments: true
 ---
 KLUE Relation Extraction 대회(In BoostCamp) 회고
 
-**AUPRC score : 1st place out of 19 teams.**
+**AUPRC score : 1st place out of 19 teams.**  
 **Micro F1 Score : 3rd place out of 19 teams.**
 
 부스트캠프에서 2주간 진행한 KLUE Relation Extraction 대회 진행과정에 대한 설명을 진행합니다! 본 과정은 Boostcamp HappyFace팀이 함께 진행하였습니다.
