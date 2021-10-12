@@ -5,7 +5,7 @@ categories: boostcamp
 tags: main
 comments: true
 ---
-MRC Project에 들어가기 앞서 MRC에 대한 Introduction을 진행한다.
+Extraction-based MRC과 Generation-based MRC에 대하여 학습한다.
 
 **부스트 캠프 47일차 학습 요약**
 - **학습** : Extraction-based MRC, Generation-based MRC
