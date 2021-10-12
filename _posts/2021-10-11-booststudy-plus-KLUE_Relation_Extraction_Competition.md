@@ -113,7 +113,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
 </style>
 ||Sentence|
 |Typed Entity Marker|\<Something\>는 [OBJ-PERSON]조지 해리슨[/OBJ-PERSON]이 쓰고 [SUB-PERSON]비틀즈[/SUB-PERSON]가 1969년 앨범 《Abbey Road》에 담은 노래다.|
-|Typed Entity Marker Punct (kor version)|\<Something\>는 &^ORG^조지 해리슨#이 쓰고 @\*사람\*비틀즈@가 1969년 앨범 《Abbey Road》에 담은 노래다.|
+|Typed Entity Marker Punct (kor version)|\<Something\>는 &^^조지 해리슨#이 쓰고 @\*사람\*비틀즈@가 1969년 앨범 《Abbey Road》에 담은 노래다.|
 {: .tablelines}
 
 ## 5. Tokenizer
