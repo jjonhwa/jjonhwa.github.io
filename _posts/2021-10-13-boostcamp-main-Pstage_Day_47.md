@@ -8,6 +8,7 @@ comments: true
 Extraction-based MRC과 Generation-based MRC에 대하여 학습한다.
 
 **부스트 캠프 47일차 학습 요약**
+- **행사** : 마스터 
 - **학습** : Extraction-based MRC, Generation-based MRC
 - **피어 세션**
 
