@@ -8,7 +8,7 @@ comments: true
 Retriever의 FAISS, Retrieval와 MRC를 연결하는 방법에 대하여 학습한다.
 
 **부스트 캠프 49일차 학습 요약**
-- **행사** : 마스터 클래스
+- **행사** : 마스터 클래스, 멘토링
 - **학습** : Scaling up with FAISS, Linking MRC and Retrieval
 - **피어 세션**
 
