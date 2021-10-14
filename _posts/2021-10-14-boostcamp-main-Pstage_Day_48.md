@@ -17,7 +17,7 @@ Passage Retrieval에서 Sparse Embedding과 Dense Embedding에 대하여 학습�
 - [2. Passage Retrieval - Dense Embedding](#2-passage-retrieval---dense-embedding)
 - [3. 해야할 일](#3-해야할-일)
 
-## 1.Passage Retrieval - Sparse Embedding
+## 1. Passage Retrieval - Sparse Embedding
 ### 1-1. Introduction to Passage Retrieval
 - Passage Retrieval이란?
 ![29](https://user-images.githubusercontent.com/53552847/137152111-dbe1db60-04f9-43b1-8454-71ce9bc71f64.PNG)
