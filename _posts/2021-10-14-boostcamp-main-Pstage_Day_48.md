@@ -8,7 +8,7 @@ comments: true
 Passage Retrieval에서 Sparse Embedding과 Dense Embedding에 대하여 학습한다.
 
 **부스트 캠프 48일차 학습 요약**
-- **행사** : 오피스
+- **행사** : 오피스아워, 
 - **학습** : Passage Retrieval - Sparse Embedding, Passage Retrieval - Dense Embedding
 - **피어 세션**
 
