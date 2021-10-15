@@ -19,14 +19,15 @@ input -> Tokenization -> Model training -> Inference -> Post-Processing(task dep
 - Text data를 모델이 이해할 수 있는 형태로 변환하기 위해 Tokenization을 진행한다.
 - Text data를 token화하고 특정 숫자로 encoding하는 과정을 모두 수행하는 것이 transformers tokenizer의 역할이다.
 - 다음의 코드처럼 활용할 수 있다.
+
 ```
 from transformers import AutoTokenizer
 
 example = '나는 정말 열심히 노력하고 있다.' # 간단한 예제를 가져온다.
 model_name = 'bert-base-case' # huggingface의 다양한 모델을 이름만 가져와서 사용할 수 있다.
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-
 ```
+
 #### Tokenizer 사용시 주의사항. (중요)
 - **Tokenizer가 내가 사용하는 데이터의 언어를 이해할 수 있는가?**
     - 내가 사용하는 언어의 tokenizer를 사용하지 않으면 대부분의 token이 unknown token으로 encoding되어 학습이 무의미해진다. 
