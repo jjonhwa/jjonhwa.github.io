@@ -25,8 +25,8 @@ from transformers import AutoTokenizer
 example = '나는 정말 열심히 노력하고 있다.' # 간단한 예제를 가져온다.
 model_name = 'bert-base-case' # huggingface의 다양한 모델을 이름만 가져와서 사용할 수 있다.
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-```
 
+```
 #### Tokenizer 사용시 주의사항. (중요)
 - **Tokenizer가 내가 사용하는 데이터의 언어를 이해할 수 있는가?**
     - 내가 사용하는 언어의 tokenizer를 사용하지 않으면 대부분의 token이 unknown token으로 encoding되어 학습이 무의미해진다. 
@@ -39,6 +39,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 - 사전 학습 모델을 사용하기 위해서는 사전학습 모델이 가진 setting을 그대로 가져와서 사용해야한다.
 - 모델마다 vocab_size, hidden_dim등의 파라미터들이 다르므로 huggingface transformers는 이를 가져오는 Config를 제공한다.
 - 다음의 코드를 활용하여 config를 불러올 수 있다.
+
 ```
 from transformers import AutoConfig
 
@@ -55,12 +56,13 @@ model_config = AutoConfig.from_pretrained(model_name)
     - vocab의 경우, special token을 추가하면 추가한 token의 개수만틈 vocab을 늘려주어 학습해야 한다.
     - downstream task를 위해 몇 가지 config를 추가할 수 있다.
 - 아래와 같이 vocab size를 늘려줄 수 있다.
+
 ```
 model_name = 'bert-base-case'
 
 model_config = AutoConfig.from_pretrained(model_name)
 model_config.vocab_size = model_config.vocab_size + 2
-# or
+# 또는 아래와 같이 사용할 수도 있다.
 model_config = AutoConfig.from_pretrained(model_name, vocab_size = 28998)
 ```
 
@@ -77,6 +79,7 @@ transformer는 두 가지 타입의 모델을 제공한다.
     - output은 task에 적합한 dimension으로 미리 정의되어 있다. 즉, 우리의 task에 맞게 output dimension만 수정하여 활용하면 된다.
 
 pretrained model의 경우 아래의 코드와 같이 불러와서 활용할 수 있다.
+
 ```
 from transformers import AutoConfig, AutoModelforQuestionAnswering
 
@@ -96,6 +99,7 @@ Trainer의 경우 아래의 구조로 간편하게 구성되어있고 활용할 
 
 
 - 아래의 코드와 같이 trainer를 활용할 수 있다.
+
 ```
 from transformers import AutoModelForQuestionAnswering, TrainingArguments, Trainer
 
@@ -141,6 +145,7 @@ trainer.train()
     - `model.resize_token_embedding`을 이용할 수 있다.
     - tokenizer의 `len()`을 활용하여 vocab size를 확인할 수 있고 이 출력값을 바탕으로 모델 사이즈도 늘려줄 수 있다.
 - 코드는 다음과 같다.
+
 ```
 model_name = 'bert-base-case'
 config = AutoConfig.from_pretrained(model_name)
@@ -169,6 +174,7 @@ model.resize_token_embeddings(len(tokenizer)
 - 여러가지 task를 수행할 때, 흔히 [CLS] token의 output을 바탕으로 classification, question answering 등이 수행된다.
 - [CLS] embedding을 indexing을 통해 가져올 수 있지만, `.pooler_output`을 활용하면 보다 쉽게 가져올 수 있다.
 - 다음의 코드와 같다.
+
 ```
 model_name = 'bert-base-case'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
