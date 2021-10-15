@@ -61,8 +61,7 @@ model_config = AutoConfig.from_pretrained(model_name)
 model_name = 'bert-base-case'
 
 model_config = AutoConfig.from_pretrained(model_name)
-model_config.vocab_size = model_config.vocab_size + 2
-# 또는 아래와 같이 사용할 수도 있다.
+model_config.vocab_size = model_config.vocab_size + 2 # 또는 아래와 같이 사용할 수도 있다.
 model_config = AutoConfig.from_pretrained(model_name, vocab_size = 28998)
 ```
 
