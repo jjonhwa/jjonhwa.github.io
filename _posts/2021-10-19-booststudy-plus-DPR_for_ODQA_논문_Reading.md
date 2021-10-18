@@ -219,4 +219,4 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - ICT -> 'ICT pretraining is computationally intensive and it is not completely clear that regular sentences are good surrogates of questions in the objective function'에 대한 내용 이해하기
 - reader model -> passage selection model 방법 알아보기 -> [RECONSIDER Paper](https://aclanthology.org/2021.naacl-main.100.pdf)
 
-본 리뷰는, 'Neural Machine Translation By Jointly Learning to Align and Translate'을 바탕으로 번역 및 본인 스스로의 의견을 덧붙여 작성하였으며 잘못된 내용이 있다면 의견을 남겨주시면 감사하겠습니다!
+본 리뷰는, 'Dense Passage Retrieval for Open-Domain Question Answering'을 바탕으로 번역 및 본인 스스로의 의견을 덧붙여 작성하였으며 잘못된 내용이 있다면 의견을 남겨주시면 감사하겠습니다!
