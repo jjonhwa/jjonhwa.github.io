@@ -13,7 +13,7 @@ Retriever의 FAISS, Retrieval와 MRC를 연결하는 방법에 대하여 학습�
 - **피어 세션**
 
 ## 목차
-- [1. Scaling up with FAISS](#1-Scaling-up-with-)
+- [1. Scaling up with FAISS](#1-Scaling-up-with-faiss)
 - [2. Linking MRC and Retrieval](#2-linking-mrc-and-retrieval)
 - [3. 해야할 일](#3-해야할-일)
 
