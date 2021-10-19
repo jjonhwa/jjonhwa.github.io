@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DPR for ODQA 논문 Reading"
+title: "[논문리뷰] Dense Passage Retrieval for Open-Domain Question Answering"
 categories: booststudy
 tags: plus
 comments: true
