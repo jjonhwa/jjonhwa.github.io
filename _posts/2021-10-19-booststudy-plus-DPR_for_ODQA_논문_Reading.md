@@ -15,7 +15,7 @@ Dense Passage Retrieval for Open-Domain Question Answering을 읽고 이에 대�
 - [3. Dense Passage Retriever](#3-dense_passage_retriever)
 - [4. Experiments: Passage Retrieval](#4-experiments-passage-retrieval)
 - [5. Experiments: Question Answering](#5-experiments-question-answering)
-- [6. Related Work](#6-related-work]
+- [6. Related Work](#6-related-work)
 - [7. 해야할 일](#7-해야할-일)
 
 
@@ -227,7 +227,7 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - IR task에서의 full dense retrieval의 실현가능성을 입증하였다. [ColBERT](https://arxiv.org/pdf/2004.12832.pdf)
 - Generation Model(BART, T5)과 결합한 DPR(knowledge-intensive task에서 좋은 성능을 보인다.) - [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/pdf/2005.11401.pdf)
 
-## 해야할 일
+## 7. 해야할 일
 - ICT -> 'ICT pretraining is computationally intensive and it is not completely clear that regular sentences are good surrogates of questions in the objective function'에 대한 내용 이해하기
 - reader model -> passage selection model 방법 알아보기 -> [RECONSIDER Paper](https://aclanthology.org/2021.naacl-main.100.pdf)
 
