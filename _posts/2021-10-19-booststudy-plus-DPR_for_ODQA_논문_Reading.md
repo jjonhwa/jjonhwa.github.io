@@ -55,12 +55,13 @@ Dense Passage Retrieval for Open-Domain Question Answering을 읽고 이에 대�
 - **Passage Encoder**로서 $$E_p$$를 활용하며 모든 passage들을 d차원을 가지는 real-valued vector로 mapping하며 모든 Passage들에 대하여 index를 build한다.
 - **Question Encoder**로서 $$E_q$$를 활용하며 이는 input question을 d차원 vector로 mapping한다.
 - 단순히, **DP(dot product)를 활용하여 question과 passage 사이의 유사도**를 정의한다.
-(사진)
+![1](https://user-images.githubusercontent.com/53552847/137823027-ca466763-05cb-439a-add0-912957f98401.PNG)
+
 
 #### Why do we use DP?
 - DP(dot product)와 NLL(Negative Log-likelyhood Loss)에 더불어, Euclidean distance(L2)와 triplet loss에 대해서 역시 실험을 진행했다.
 - 다음의 표와 같은 결과가 나왔다.
-(사진)
+![2](https://user-images.githubusercontent.com/53552847/137823028-f4c88490-fdce-4dd0-b612-ce2556b979d8.PNG)
 - **이러한 이유로, DP(dot product) 유사도를 활용**하였고, 이로부터 더 나은 better encoder를 학습할 수 있었다.
 
 #### Encoder
@@ -75,9 +76,10 @@ Dense Passage Retrieval for Open-Domain Question Answering을 읽고 이에 대�
 ### 3-2. Training
 - 학습의 목표는 Question vector와 Passage vector 사이의 거리를 관계가 있는 것은 가깝게 관계가 없는 것은 멀게 만드는 것이다.
 - 학습 데이터의 모양은 다음과 같으며, 여기서 q는 Question, p+는 positive passage, p-는 negative passage를 의미한다.
-(사진)
+![3](https://user-images.githubusercontent.com/53552847/137823029-1789fb72-121d-4960-aeba-22d2a7d422bf.PNG)
 - **Loss Function은 NLL을 활용**하였으며 식은 다음과 같다.
-(사진)
+![4](https://user-images.githubusercontent.com/53552847/137823030-2bf8fbf8-1be6-4d33-8015-f32240f44d00.PNG)
+
 
 #### Positive & Negative passages
 - 보통 positive passage들은 명확히 선택할 수 있는데에 반해 negative passage들은 많은 passage들 중에서 다양한 방법으로 선택될 수 있다.
@@ -113,11 +115,11 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - **BM25 + DPR**
     - new ranking function을 활용하여 linear combination을 진행
     - **BM25/DPR에서 top-2000개의 passage를 뽑은 후, 다음의 식을 활용하여 top-k개의 최종 passage를 선택**
-(사진)
+![5](https://user-images.githubusercontent.com/53552847/137823033-17c34eb5-6fe3-4059-a6f0-74c787a4c01f.PNG)
     - 이 때, **lambda는 가중치 상수이며 본 논문에서는 Retrieval 정확도에 기반하여 1.1을 활용**하였다.
 
 ### 4-2. Main Results
-(사진)
+![6](https://user-images.githubusercontent.com/53552847/137823008-7d78b45a-8aef-44f5-a497-d904bce5f75b.PNG)
 - 위의 표처럼, top-20/top-50에 대하여 5개의 QA datasets에 대한 실험을 진행하였다.
 - SQuAD를 제외하고는 DPR의 성능이 BM25보다 뛰어나는 것을 확인할 수 있다.
 - Single의 경우, 각각의 Dataset에 대하여 학습시킨 DPR을 활요한 것이며, Multiple의 경우 SQuAD를 제외한 4개의 Dataset을 합쳐서 학습시킨 DPR을 활용한 결과이다.
@@ -134,12 +136,12 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 
 ### 4-3. Ablation Study on Model Training
 #### Sample efficiency
-(그림)
+![7](https://user-images.githubusercontent.com/53552847/137823015-3e442390-87c9-413c-a07d-43516eb868f9.PNG)
 - **좀 더 많은 training dataset을 활용할 수록 retrieval accuracy는 증가**한다.
 - top-k 즉, **retrieval할 최종 passage의 개수를 늘릴 수록 retrieval accurayc는 증가**한다.
 
 #### In-batch negative training
-(그림)
+![8](https://user-images.githubusercontent.com/53552847/137823020-77e4d628-71a3-48a2-b2f9-97396c69b79e.PNG)
 - #N : Negative sample의 개수를 의미한다.
 - IB : In-Batch, 즉 batch 내에서의 negative sampling을 진행함을 의미한다.
 - Top-k : 최종 k개의 passage 내에서의 ground-truth passage가 있을 확률을 의미한다.
@@ -150,13 +152,13 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - **더불어, BM25 negative passage를 각 question별 1개를 사용하는 것과 2개를 활용하는 것은 큰 차이가 없음을 확인할 수 있다. 즉, 2개 이상을 활용하는 것은 더이상 도움이 안된다고 판단한다.**
 
 #### Impact of gold passages
-(그림)
+![9](https://user-images.githubusercontent.com/53552847/137823022-d52a3947-feec-4ada-b157-4b57e6f21150.PNG)
 - 본 논문에서는 dataset 내에서의 gold context(question에 대한 ground-truth passage)를 활용하여 학습을 진행한다.
 - 이에 대하여, 위의 표에서 처럼 **Dist. Sup과 Gold 사이의 차이를 실험하여 진행하였으며 Gold Context를 활용하였을 때 보다 성능이 좋음**을 볼 수 있다.
     - Dist. Sup : BM25를 활용하여 context들 중에서 정답을 포함하면서 가장 확률이 높은 context를 ground-truth passage로 활용한다. 
 
 #### Similarity & Loss
-(그림)
+![10](https://user-images.githubusercontent.com/53552847/137823023-53a6fb06-fe0b-478b-b814-2423953b96e0.PNG)
 - L2 norm은 DP(dot product)와 비슷한 성능을 내며, 이 둘 모두 cosine 유사도보다 높은 성능을 낸다.
 - negative log-likelihood와 더불어 triplet loss를 활용하여 비교 실험을 진행하였다.
 - 위의 표에서 처럼, 최종적으로 **DP와 NLL을 활용하였을 때, 가장 좋은 성능**을 냈고 이에 따라 본 논문에서 역시 DP와 NLL을 활용하여 진행하였다.
@@ -194,7 +196,7 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
     - cross-attention은 분해할 수 없는 특성으로 인해서  대규모 말뭉치의 관련 구절을 검색할 수는 없지만 dual-encoder model의 similarity보다는 좀 더 용이하다.
 
 #### How can you get the answer span? 
-(그림)
+![11](https://user-images.githubusercontent.com/53552847/137823025-28c9fbb9-ed78-496f-a0df-1d2035feac0e.PNG)
 - $$P_i$$는 i번쨰 passage에 대한 BERT representation이며, (Lxh)를 가지며 L은 maximum length of the passage, h는 hidden dimension을 의미한다.
 - 정답 span의 처음에 위치할 확률과 마지막에 위치할 확률은 위의 그림과 같이 계산된다.
 - passage가 선택될 확률 역시 위의 그림과 같이 계산된다.
@@ -208,15 +210,21 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - batch_size : 16(NQ, TriviaQA, SQuAD), 4(TREC, WQ)
 
 ### 5-2. Results
-(그림)
+![12](https://user-images.githubusercontent.com/53552847/137823026-96066d9d-5a00-4c3b-b874-703ff99f5649.PNG)
 - retriever accuracy가 높을 수록 전체 ODQA 결과 역시 더 높다.
 - **ORQA/REALM 모두 추가적인 pretraining task와 expensive end-to-end training regime를 가지고 있는데 반해, 본 논문에서의 DPR Retrieval를 활용한 ODQA는 간단히 (Q, P) 쌍에 대한 강력한 DPR model만을 활용하여 NQ, TriviaQA에서 더 좋은 성능을 도출**했다.
 - **추가적인 pretraining task는 dataset이 작을 경우에 더 유용할 수 있다.**
 - Retrieval와 Reader가 함께 학습되는 모델([joint model](https://arxiv.org/pdf/1906.00300.pdf))과의 비교 실험을 진행했으며, 이 때 39.8 EM이 나왔으며, 이에 비해 독립적인 Retriever와 Reader를 사용하는 것이 더 좋은 성능을 나타내며 더 좋은 전략임을 제안한다.
 - 더불어, inference하는 과정에서 명확히 얼마나 더 많은 시간이 걸리는지 알 수는 없지만 ORQA에 비해 본 논문에서 사용한 Reader가 더 많은 Passage를 고려하여 task를 수행한다.
 
+## 6. Related Work
+- 지식 그래프와 위키피디아 하이퍼링크와 같은 외부의 구조화된 정보로 텍스트 기반 Retrieval을 하는 것이 최근에 연구되고 있다.[LEARNING TO RETRIEVE REASONING PATHS OVER WIKIPEDIA GRAPH FOR QUESTION ANSWERING](https://arxiv.org/pdf/1911.10470.pdf)
+- [Poly-encoders](https://arxiv.org/pdf/1905.01969.pdf)에서 효율적인 re-ranking task를 보여주고있다.
+- IR task에서의 full dense retrieval의 실현가능성을 입증하였다. [ColBERT](https://arxiv.org/pdf/2004.12832.pdf)
+- Generation Model(BART, T5)과 결합한 DPR(knowledge-intensive task에서 좋은 성능을 보인다.) - [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/pdf/2005.11401.pdf)
+
 ## 해야할 일
 - ICT -> 'ICT pretraining is computationally intensive and it is not completely clear that regular sentences are good surrogates of questions in the objective function'에 대한 내용 이해하기
 - reader model -> passage selection model 방법 알아보기 -> [RECONSIDER Paper](https://aclanthology.org/2021.naacl-main.100.pdf)
 
-본 리뷰는, 'Dense Passage Retrieval for Open-Domain Question Answering'을 바탕으로 번역 및 본인 스스로의 의견을 덧붙여 작성하였으며 잘못된 내용이 있다면 의견을 남겨주시면 감사하겠습니다!
+본 리뷰는, 'Neural Machine Translation By Jointly Learning to Align and Translate'을 바탕으로 번역 및 본인 스스로의 의견을 덧붙여 작성하였으며 잘못된 내용이 있다면 의견을 남겨주시면 감사하겠습니다!
