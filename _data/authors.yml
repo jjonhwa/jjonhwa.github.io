@@ -22,7 +22,7 @@ jjonhwa:
   # Comment/uncommet to show/hide
   # Icons appear in order, can be rearranged:
   social:
-    facebook:        cantouchmin
+    # facebook:        <username>
     # twitter:         <username>
     # google:          <number>
     # vk:              <username>
