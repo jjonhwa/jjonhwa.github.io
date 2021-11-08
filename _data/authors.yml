@@ -1,7 +1,7 @@
 # The primary author of this blog.
 # Must be the same as `author` in `_config.yml`.
 # Change `qwtel` to your shortname (used in the front matter to set a page's author, e.g. `author: qwtel`).
-theorydb:
+jjonhwa:
   name:              SungUk
   email:             jjonhwa@naver.com
 
@@ -46,7 +46,7 @@ theorydb:
     # pinterest:       <username>
     # foursquare:      <number>
     # yelp:            <string>
-    github:          theorydb
+    github:          jjonhwa
     # stackoverflow:   <number/username>
     # npm:             <username>
     # hackernews:      <username>
@@ -57,8 +57,8 @@ theorydb:
     # delicious:       <username>
     # stumbleupon:     <username>
     # paypal:          <username>
-    email:           mailto:theorydb@gmail.com
-    rss:             https://theorydb.github.io/feed.xml
+    email:           mailto:jjonhwa@naver.com
+    # rss:             <username>
 
 # Another author
 mdo:
