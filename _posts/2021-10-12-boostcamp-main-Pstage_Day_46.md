@@ -8,12 +8,12 @@ comments: true
 MRC Project에 들어가기 앞서 MRC에 대한 Introduction을 진행한다.
 
 **부스트 캠프 46일차 학습 요약**
-- **학습** : MRC Intro & Python Basics
+- **학습** : MRC Intro and Python Basics
 - **피어 세션**
 
 ## 목차
 - [1. Introduction to MRC](#1-introduction-to-mrc)
-- [2. Unicode & Tokenization](#2-unicode--tokenization)
+- [2. Unicode and Tokenization](#2-unicode-and-tokenization)
 - [3. Dataset](#3-dataset)
 - [4. 해야할 일](#4-해야할-일)
 
@@ -78,13 +78,13 @@ MRC Project에 들어가기 앞서 MRC에 대한 Introduction을 진행한다.
     - 예측한 답과 Ground-Truth 사이의 Precision
     - 실제로 n-gram에서의 n을 정의해줌으로서, n-gram level에서의 겹치는 단어를 비교하여 점수를 낸다.
 
-## 2. Unicode & Tokenization
+## 2. Unicode and Tokenization
 ### 2-1. Unicode란?
 ![7](https://user-images.githubusercontent.com/53552847/136954369-a66c9248-bcb4-42a9-bb68-d9a8477e8b71.PNG)
 - 전 세계의 모든 문자를 일관되게 표현하고 다룰 수 있도록 만들어진 문자셋
 - 각 문자마다 숫자 하나에 매핑한다.
 
-### 2-2. 인코딩 & UTF-8
+### 2-2. 인코딩 and UTF-8
 - 인코딩이란?
     - 문자를 컴퓨터에서 저장 및 처리할 수 있도록 이진수로 바꾸는 것
 - UTF-8 (Unicode Transformation Format)
