@@ -98,7 +98,7 @@ AI 엔지니어로서 알면 좋은 지식들에 대하여 학습한다.
     - 처리 시간을 줄인다 : AI 모델의 처리 속도가 N배 올라가면 QPS 역시 N배 올라간다.
     - 모델의 크기를 줄인다 : 한 GPU에 올라가는 모델의 수가 N배가 되면, QPS 역시 N배 올라간다. (다만, GPU resource의 한계에 대하여 선형적으로 N배가 되는 것은 아니다. ex) 10GB GPU, 7GB Model일 경우 QPS가 1이라고 할 때, 6GB Model로 줄였다고 해서 QPS가 2가 되는 것은 아니고 5GB가 되어야 GPU에 2개의 Model을 올려서 QPS를 2배로 늘릴 수 있게 된다.)
 
-#### Serving & 장비
+#### Serving and 장비
 - Serving의 경우 AI 모델이 어떤 하드웨어 device에서 동작 하느냐와 굉장히 밀접하게 관련되어 있다.
 - Mobile에서 동작하기를 원하는 지, Local CPU/GPU server에서 동작하기를 원하는 지, Cloud CPU/GPU server에서 동작하기 원하는 지 등을 고려해야 한다.
 - 장비의 경우, serving 장비 조차 없어 장비 구축과 함께 요규하는 경우도 있는데, 이럴 때 예산/QPS에 맞춰서 장비 사양도 함께 정해주어야 한다.
