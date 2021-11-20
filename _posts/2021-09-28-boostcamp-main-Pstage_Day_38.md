@@ -44,7 +44,7 @@ BERT 모델에 대하여 이해하고 모델 학습에 대하여 알아본다.
 - [CLS] token이 token vector에 입력된 sentence에 대한 정보가 모두 녹아서 Embedding 될 것이다.
 - Sentence 1, 2를 잘 표현하기 위해서 [CLS] token 위에 classification layer를 부착해서 pre-training을 진행한다.
 
-### 1-5. 학습 데이터 & Tokenizing
+### 1-5. 학습 데이터 and Tokenizing
 #### 학습 데이터
 - BooksCorpus (800M words)
 - English Wikipedia (2,500M words without lists, tables and headers)
