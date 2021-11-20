@@ -85,7 +85,7 @@ Dense Passage Retrieval for Open-Domain Question Answering을 읽고 이에 대�
 ![4](https://user-images.githubusercontent.com/53552847/137823030-2bf8fbf8-1be6-4d33-8015-f32240f44d00.PNG)
 
 
-#### Positive & Negative passages
+#### Positive and Negative passages
 - 보통 positive passage들은 명확히 선택할 수 있는데에 반해 negative passage들은 많은 passage들 중에서 다양한 방법으로 선택될 수 있다.
 - **negative passage를 선택하는 것은 간단하지만 좋은 encoder를 학습시키는데 중요한 요소**가 될 수 있다.
 - Different types of negatives
@@ -161,7 +161,7 @@ mini-batch내의 B개의 Question이 있다라고 가정할 때, 각 Question들
 - 이에 대하여, 위의 표에서 처럼 **Dist. Sup과 Gold 사이의 차이를 실험하여 진행하였으며 Gold Context를 활용하였을 때 보다 성능이 좋음**을 볼 수 있다.
     - Dist. Sup : BM25를 활용하여 context들 중에서 정답을 포함하면서 가장 확률이 높은 context를 ground-truth passage로 활용한다. 
 
-#### Similarity & Loss
+#### Similarity and Loss
 ![10](https://user-images.githubusercontent.com/53552847/137823023-53a6fb06-fe0b-478b-b814-2423953b96e0.PNG)
 - L2 norm은 DP(dot product)와 비슷한 성능을 내며, 이 둘 모두 cosine 유사도보다 높은 성능을 낸다.
 - negative log-likelihood와 더불어 triplet loss를 활용하여 비교 실험을 진행하였다.
