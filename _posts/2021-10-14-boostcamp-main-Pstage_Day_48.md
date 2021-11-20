@@ -98,7 +98,7 @@ Passage Retrieval에서 Sparse Embedding과 Dense Embedding에 대하여 학습�
     - 중요한 점
         - IDF의 경우, Document 마다가 아닌 Term 마다 unique하다는 성격이 있다.
         - 문서마다 점수가 다르지 않다.
-- Combine TF & IDF 
+- Combine TF and IDF 
     - TF-IDF(t, d): TF-IDF for term t in document d
     ![35](https://user-images.githubusercontent.com/53552847/137152131-0b60f7c0-adaf-4e96-9994-3aad2070f796.PNG)
         - document d에 대한 term t의 대한 TF를 계산하고 document d와는 무관하게 term t에 대한 IDF를 계산하여 연산을 진행한다.
