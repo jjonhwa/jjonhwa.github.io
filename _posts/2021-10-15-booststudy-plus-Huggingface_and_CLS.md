@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Huggingface & CLS"
+title: "Huggingface and CLS"
 categories: booststudy
 tags: plus
 comments: true
