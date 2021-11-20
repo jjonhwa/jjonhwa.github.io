@@ -136,7 +136,7 @@ Extraction-based MRC과 Generation-based MRC에 대하여 학습한다.
 - BART의 경우, 실제 text를 내보내는 방식으로 진행된다.
 - pre-training을 진행할 때 역시 BERT의 경우 기존 문장에 몇몇 단어들을 MASK한 후 이를 예측하는 방식으로 학습하지만 BART의 경우 기존 문장을 비슷한 방식으로 MASK를 진행하지만 MASK된 단어를 맞추는 방식이 아닌 정답을 생성하는 방식으로 진행한다.
 
-#### BART Encoder & Decoder
+#### BART Encoder and Decoder
 ![27](https://user-images.githubusercontent.com/53552847/136954350-0b78a363-1a40-49be-9a05-0cebc8ad5071.PNG)
 - BART의 인코더는 BERT처럼 Bi-directional
 - BART의 디코더는 GPT처럼 uni-directional(autoregressive)
