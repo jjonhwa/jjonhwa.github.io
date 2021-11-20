@@ -224,7 +224,7 @@ KLUE Relation Extraction 대회(In BoostCamp) 회고
     - **RBERT의 경우, 각 entity token의 hidden state vector들의 평균을 활용하여 classification을 진행하는데 이 과정에서 각 token들의 순서를 무시**하게된다.
     - 이러한 문제로 인해, 첫 번째 토큰의 hidden state vector만 활용하는 RE Improved Baseline과 큰 성능 차이가 없는 것으로 판단된다.
 
-### 8-3. Loss & Optimizer
+### 8-3. Loss and Optimizer
 #### Loss
 - Imbalanced Dataset에 대하여 Weights to CrossEntropy Loss, LabelSmoothing Loss, Focal Loss 적용을 고려하였다.
 - 이전 대회의 경험(MASK Competition)을 바탕으로, Focal Loss를 활용 했을 때, Imbalanced Dataset에 대하여 성능 개선이 이루어졌음을 실험적으로 깨달았으며, **본 과정에서 역시 Focal Loss를 활용하여 진행**하였다. (Focal Loss : Cross Entorpy에 Gamma와 Weight를 추가하여 잘 맞추는 Label에 대한 Loss를 줄여 갱신 속도를 늦춰주는 손실함수이다. [출처](https://arxiv.org/pdf/1708.02002.pdf))
