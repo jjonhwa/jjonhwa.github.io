@@ -51,9 +51,15 @@ PyTorch에 대한 기본적인 내용을 학습한다.
 - Debug에서 큰 장점을 가진다. 
 
 ### 1-3. Tensorflow vs PyTorch
+<style>
+.tablelines table, .tablelines td, .tablelines th {
+    border: 1px solid black;
+    }
+</style>
 |Tensorflow|PyTorch|
 |---|---|
 |Production, Cloud 연결, Multi-GPU, Scalability|개발 과정에서의 쉬운 Debugging, 논문 작성 및 아이디어 구현 용이, Define by Run (Pythonic Code), GPU Support, Good API and Community, 사용하기 쉽다.|
+{: .tablelines}
 
 ### 1-4. PyTorch의 특징
 - Numpy + AutoGrad + Function
