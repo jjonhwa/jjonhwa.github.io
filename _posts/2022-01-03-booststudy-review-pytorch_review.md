@@ -94,7 +94,3 @@ tensor([[1., 1.],
 print(b)
 tensor([1., 1., 1., 1., 1., 1.])
 ```
-
-## 해야할 것
-- view와 reshape은 contiguity 보장의 차이란 무엇인가?
-- 
