@@ -33,6 +33,7 @@ Vector, Matrix, Lasso and Lidge
 
 ### Code
 - Norm
+
 ```python
 def l1_norm(x):
     x_norm = np.abs(x)
