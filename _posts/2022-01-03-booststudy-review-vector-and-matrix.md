@@ -11,7 +11,6 @@ Vector, Matrix, Lasso and Lidge
 - [1. Vector](#1-vector)
 - [2. Matrix](#2-matrix)
 - [3. Lasso and Lidge](#3-lasso-and-ridge)
-- [4. ]
 
 ## 1. Vector
 ### 정의
