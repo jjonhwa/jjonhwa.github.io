@@ -69,6 +69,7 @@ tensor_array = torch.from_numpy(nd_array)
 - view: contiguous tensor에서만 작동함. -> contiguous tensor를 반환
 - reshape: contiguous tensor에서는 view와 동일하게 작동. non-contiguous tensor에서는 data를 copy한다.
 - 아래 코드를 실행
+
 ```python 
 a = torch.zeros(3, 2)
 b = a.t().reshape(6)
