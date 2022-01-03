@@ -41,6 +41,8 @@ PyTorch, Tensorflow, Tensor, view and reshape
 - view vs reshape : contiguity 보장의 차이
 - 행렬곱셈 연산의 경우 mm을 활용 (tensor에서는 dot을 활용하지 않는다.)
 - mm과 matmul은 broadcasting 지원 차이
+    - matmul을 활용할 경우, 차원을 잘못맞추면 예상과 다른 결과가 나올 수 있다!! 
+    - error가 발생하지 않아서 debugging에 어려움이 있을 수 있다. 
 - nn.functional 모듈을 통해 다양한 수식 변환을 지원한다.
 - backward 함수를 통한 자동 미분을 지원한다.
 
