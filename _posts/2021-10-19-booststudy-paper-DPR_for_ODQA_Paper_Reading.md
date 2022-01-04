@@ -2,7 +2,7 @@
 layout: post
 title: "[논문리뷰] Dense Passage Retrieval for Open-Domain Question Answering"
 categories: booststudy
-tags: plus
+tags: paper
 comments: true
 ---
 Dense Passage Retrieval for Open-Domain Question Answering을 읽고 이에 대하여 논의한다.
