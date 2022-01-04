@@ -2,7 +2,7 @@
 layout: post
 title: "[논문리뷰] VQGAN: Taming Transformers for High-Resolution Image Synthesis"
 categories: booststudy
-tags: plus
+tags: paper
 comments: true
 ---
 VQGAN: [Taming Transformers for High-Resolution Image Synthesis](https://arxiv.org/abs/2012.09841)를 읽고 이에 대하여 논의한다.
