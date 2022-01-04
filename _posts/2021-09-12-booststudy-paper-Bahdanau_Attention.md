@@ -2,7 +2,7 @@
 layout: post
 title: "bahdanau attention 논문 Reading"
 categories: booststudy
-tags: plus
+tags: paper
 comments: true
 ---
 Neural Machine Translation By Jointly Learning to Align and Translate 에 대하여 설명한다.
