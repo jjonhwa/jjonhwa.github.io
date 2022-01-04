@@ -2,7 +2,7 @@
 layout: post
 title: "Transformer"
 categories: booststudy
-tags: plus
+tags: paper
 comments: true
 ---
 Attention Is All You Need (Transformer)에 대하여 설명한다.
