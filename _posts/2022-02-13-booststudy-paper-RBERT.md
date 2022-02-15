@@ -5,8 +5,7 @@ categories: booststudy
 tags: paper
 comments: true
 ---
-RBERT: [Enriching Pre-Training Language Model with Entity Information for Relation Classification"
-categories](https://arxiv.org/pdf/1905.08284.pdf)를 읽고 이에 대하여 논의한다.
+RBERT: [Enriching Pre-Training Language Model with Entity Information for Relation Classification](https://arxiv.org/pdf/1905.08284.pdf)를 읽고 이에 대하여 논의한다.
 
 ## 목차
 - [1. Abstract](#1-abstract)
