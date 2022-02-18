@@ -96,8 +96,8 @@ comments: true
 
 #### Typed entity marker
 - 이 technique은 NER type을 entity marker에 통합하는 방법이다.
-- 이는 새로운 Special token인 /<S:TYPE/>, /</S:TYPE/>, /<O:TYPE/>, /</O:TYPE/>을 사용하는 방법이다.
-- input text는 "/<S:TYPE/> SUBJ /</S:TYPE/> ... /<O:TYPE/> OBJ /</O:TYPE/>"의 형태가 된다.
+- 이는 새로운 Special token인 [S:TYPE], [/S:TYPE], [O:TYPE], [/O:TYPE]을 사용하는 방법이다.
+- input text는 "[S:TYPE] SUBJ [/S:TYPE] ... [O:TYPE] OBJ [/O:TYPE]"의 형태가 된다.
 
 ### Typed entity marker (punct)
 - 새로운 special token을 사용하지 않고, entity span과 entity type을 marking하는 typed entity marker 방식을 제안한다.
