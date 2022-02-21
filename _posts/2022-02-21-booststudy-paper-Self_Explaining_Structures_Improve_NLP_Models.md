@@ -10,7 +10,7 @@ comments: true
 ## 목차
 - [1. Abstract](#1-abstract)
 - [2. Introduction](#2-introduction)
-- [3. Self-Explaining Framework](#3-self---explaining-Framework)
+- [3. Self-Explaining Framework](#3-self---explaining-framework)
 - [4. Experiments](#4-experiments)
 - [5. Analysis](#5-analysis)
 - [6. Conclusion](#6-conclusion)
